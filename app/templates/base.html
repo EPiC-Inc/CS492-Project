@@ -1,11 +1,40 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <link rel="icon" type="image/x-icon" href="{{ url_for('static/favicon.ico') }}">
-        <title>DEV_ENV</title>
+        <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon_default.ico') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+        <title>{% block title %}{% endblock %} | SMS</title>
+        {% block head %}
+        {% endblock %}
     </head>
 
     <body>
-        <p>test</p>
+        <header>
+            <!-- This eventually will contain a navbar / banner with links -->
+            <!-- Will display only links that the account has access to -->
+            <div>School Logo</div>
+            {% for tab in allowed_tabs %}
+                {% if tab == "login" %}
+                    <div><a href="{{ url_for('login') }}">Log In</a></div>
+                {% endif %}
+                {% if tab == "dashboard" %}
+                    <div>Dashboard</div>
+                {% endif %}
+                {% if tab == "admin" %}
+                    <div>Admin</div>
+                {% endif %}
+                {% if tab == "courses" %}
+                    <div>Courses</div>
+                {% endif %}
+                {% if tab == "logout" %}
+                    <div>Log Out</div>
+                {% endif %}
+            {% endfor %}
+        </header>
+        {% block body %}
+        {% endblock %}
     </body>
+
+    {% block scripts %}
+    {% endblock %}
 </html>

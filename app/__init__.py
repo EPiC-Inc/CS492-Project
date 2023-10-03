@@ -1,6 +1,7 @@
 from flask import Flask
+from os import environ
 
 app = Flask(__name__)
-# app.url_map.host_matching = True    # This lets it support multiple sites
+app.secret_key = environ.get("MGMT_SECRET_KEY", AssertionError("Please make sure a secret key is configured with the environment variable MGMT_SECRET_KEY"))
 
 from . import routes

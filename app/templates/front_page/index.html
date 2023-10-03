@@ -1,11 +1,19 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
         <title>School Management System</title>
+        <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon_default.ico') }}">
     </head>
 
     <body>
-        <header>School Logo | Header | Log In</header>
+        <header>
+            <div>School Logo</div>
+            |
+            <div>Header</div>
+            |
+            <div><a href="{{ url_for('login') }}">Log In</a></div>
+        </header>
         <p>Information about the school</p>
     </body>
 </html>

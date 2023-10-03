@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}Log In{% endblock %}
+
+{% block body %}
+<form id="login_form" action="{{ url_for('login') }}" method="post">
+    <label for="id">Login ID:</label>
+    <input name="id" type="text" autofill="username">
+    <br>
+    <label for="password">Password:</label>
+    <input name="password" type="password" autofill="password">
+    <br>
+    <input type="submit" value="Log In">
+</form>
+<p>Forgot your password? Please contact your school's IT department.</p>
+{% endblock %}
