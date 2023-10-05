@@ -3,14 +3,17 @@
 {% block title %}Log In{% endblock %}
 
 {% block body %}
-<form id="login_form" action="{{ url_for('login') }}" method="post">
-    <label for="id">Login ID:</label>
-    <input name="id" type="text" autofill="username">
-    <br>
-    <label for="password">Password:</label>
-    <input name="password" type="password" autofill="password">
-    <br>
-    <input type="submit" value="Log In">
-</form>
-<p>Forgot your password? Please contact your school's IT department.</p>
+<div id="login_form">
+    <div>Welcome to Student Management Online</div>
+    <form action="{{ url_for('login') }}" method="post">
+        <label for="id">Log In</label><br />
+        <input name="id" type="text" autocomplete="email" placeholder="School Email Address">
+        <br />
+        <input name="password" type="password" autocomplete="password" placeholder="Password">
+        <br />
+        <input type="submit" value="Log In">
+        <!--TODO: 2FA -->
+    </form>
+    <div id="passwd_reset_info">Forgot your password? Please contact your school's IT department.</div>
+</div>
 {% endblock %}

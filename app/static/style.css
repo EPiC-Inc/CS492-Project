@@ -2,3 +2,44 @@ header {
     display: flex;
     flex-direction: row;
 }
+
+#login_form {
+    border: 2px solid #979797;
+    border-radius: 2px;
+    box-shadow: 0 5px 4px #c0c0c0;
+    display: flex;
+    flex-direction: column;
+    font-size: 32px;
+    gap: 12px;
+    margin: auto;
+    padding: 20px 40px;
+    width: fit-content;
+}
+#login_form form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 12px 20px;
+}
+#login_form form input[type="text"], #login_form form input[type="password"] {
+    font-size: 20px;
+    padding: 4px 12px;
+}
+#login_form form input[type="submit"] {
+    background-color: #19a0fa;
+    border: none;
+    border-radius: 6px;
+    color: white;
+    cursor: pointer;
+    margin: 20px 0;
+    padding: 10px 33px;
+    transition: background-color 300ms;
+    width: fit-content;
+}
+#login_form form input[type="submit"]:hover {
+    background-color: #0483d7;
+}
+#login_form #passwd_reset_info {
+    font-size: 18px;
+    margin: 6px auto;
+}
