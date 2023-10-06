@@ -6,11 +6,9 @@
 <div id="login_form">
     <div>Welcome to Student Management Online</div>
     <form action="{{ url_for('login') }}" method="post">
-        <label for="id">Log In</label><br />
-        <input name="id" type="text" autocomplete="email" placeholder="School Email Address">
-        <br />
-        <input name="password" type="password" autocomplete="password" placeholder="Password">
-        <br />
+        <label for="email">Log In</label>
+        <input id="email" name="email" type="text" autocomplete="email" placeholder="School Email Address">
+        <input name="password" type="password" autocomplete="current-password" placeholder="Password">
         <input type="submit" value="Log In">
         <!--TODO: 2FA -->
     </form>
