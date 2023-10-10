@@ -13,6 +13,8 @@ debugpy @ https://files.pythonhosted.org/packages/97/b2/1b264a5985de53f3f9399eb3
 distlib==0.3.7
 filelock==3.12.2
 Flask @ https://files.pythonhosted.org/packages/fa/1a/f191d32818e5cd985bdd3f47a6e4f525e2db1ce5e8150045ca0c31813686/Flask-2.3.2-py3-none-any.whl#sha256=77fd4e1249d8c9923de34907236b747ced06e5467ecac1a7bb7115ae0e9670b0
+flask-sqlalchemy @ https://files.pythonhosted.org/packages/1d/6a/89963a5c6ecf166e8be29e0d1bf6806051ee8fe6c82e232842e3aeac9204/flask_sqlalchemy-3.1.1-py3-none-any.whl#sha256=4ba4be7f419dc72f4efd8802d69974803c37259dd42f3913b0dcf75c9447e0a0
+greenlet @ https://files.pythonhosted.org/packages/be/ab/41dee001218f799bb5c78e338fa5e81fff074d65a917e21ce4696476c45b/greenlet-3.0.0-cp310-cp310-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl#sha256=02a807b2a58d5cdebb07050efe3d7deaf915468d112dfcf5e426d0564aa3aa4a
 html5lib==1.1
 idna==3.4
 importlib-metadata==6.8.0
@@ -39,6 +41,7 @@ ptyprocess==0.7.0
 pycparser==2.21
 pyflakes @ https://files.pythonhosted.org/packages/dc/13/63178f59f74e53acc2165aee4b002619a3cfa7eeaeac989a9eb41edf364e/pyflakes-2.5.0-py2.py3-none-any.whl#sha256=4579f67d887f804e67edb544428f264b7b24f435b263c4614f384135cea553d2
 pylev==1.4.0
+pyodbc @ https://files.pythonhosted.org/packages/24/59/1a657510e6dd058c74df3b3a4d8af51d724f21db34f10b4f3ac484bedb91/pyodbc-4.0.39-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl#sha256=c5faf2870e9d434c6a85c6adc1cdff55c0e376273baf480f06d9848025405688
 python-lsp-jsonrpc @ https://files.pythonhosted.org/packages/06/ee/754bfd5f6bfe7162c10d3ecb0aeef6f882f91d3231596c83f761a75efd0b/python_lsp_jsonrpc-1.0.0-py3-none-any.whl#sha256=079b143be64b0a378bdb21dff5e28a8c1393fe7e8a654ef068322d754e545fc7
 replit-python-lsp-server @ https://files.pythonhosted.org/packages/09/42/44ff903505cefa2b2d06fcc164ddff74510eece259e30da6a0c2c68976c8/replit_python_lsp_server-1.15.9-py3-none-any.whl#sha256=205faf150008be7d3da2ac16fc178c833d22835e24841cb82b666443a6b28bef
 requests==2.31.0
@@ -47,9 +50,11 @@ rope @ https://files.pythonhosted.org/packages/76/f3/ebd965c6b44b32c3edb1ecaeba9
 SecretStorage==3.3.3
 shellingham @ https://files.pythonhosted.org/packages/89/6e/41614878c7e964c907016418a8493a5508253727a15862a79992940ac9c3/shellingham-1.5.1-py2.py3-none-any.whl#sha256=ce5f6d0062c719deabf696bccfab5273e09a6ea1b0ed32867aff03392adbdc51
 six==1.16.0
+SQLAlchemy @ https://files.pythonhosted.org/packages/99/f4/5c7868896285b0d95b6b3f0310850c6cf50b965569417c2959d2bd6a115d/SQLAlchemy-2.0.21-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl#sha256=7ca38746eac23dd7c20bec9278d2058c7ad662b2f1576e4c3dbfcd7c00cc48fa
 toml @ https://files.pythonhosted.org/packages/44/6f/7120676b6d73228c96e17f1f794d8ab046fc910d781c8d151120c3f1569e/toml-0.10.2-py2.py3-none-any.whl#sha256=806143ae5bfb6a3c6e736a764057db0e6a0e05e338b5630894a5f779cabb4f9b
 tomli @ https://files.pythonhosted.org/packages/97/75/10a9ebee3fd790d20926a90a2547f0bf78f371b2f13aa822c759680ca7b9/tomli-2.0.1-py3-none-any.whl#sha256=939de3e7a6161af0c887ef91b7d41a53e7c5a1ca976325f429cb46ea9bc30ecc
 tomlkit @ https://files.pythonhosted.org/packages/a0/6d/808775ed618e51edaa7bbe6759e22e1c7eafe359af6e084700c6d39d3455/tomlkit-0.12.1-py3-none-any.whl#sha256=712cbd236609acc6a3e2e97253dfc52d4c2082982a88f61b640ecf0817eab899
+typing-extensions @ https://files.pythonhosted.org/packages/24/21/7d397a4b7934ff4028987914ac1044d3b7d52712f30e2ac7a2ae5bc86dd0/typing_extensions-4.8.0-py3-none-any.whl#sha256=8f92fc8806f9a6b641eaa5318da32b44d401efaac0f6678c9bc448ba3605faa0
 ujson @ https://files.pythonhosted.org/packages/78/90/bfa62616208bd5195a113c0aa4e42c9f471e69edfc48feba6a0ab494cccb/ujson-5.8.0-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl#sha256=40931d7c08c4ce99adc4b409ddb1bbb01635a950e81239c2382cfe24251b127a
 urllib3==1.26.15
 virtualenv==20.24.2

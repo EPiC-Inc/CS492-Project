@@ -4,16 +4,27 @@
         <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
         <title>School Management System</title>
         <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon_default.ico') }}">
+
+        <style>
+            
+        </style>
     </head>
 
     <body>
         <header>
-            <div>School Logo</div>
-            |
-            <div>Header</div>
-            |
-            <div><a href="{{ url_for('login') }}">Log In</a></div>
+            <img src="path_to_your_image.jpg" alt="School Logo">
+            <a href="{{ url_for('index') }}"><div class="current" >Home</div></a>
+            <a href="{{ url_for('login') }}"><div>Log In</div></a>
         </header>
-        <p>Information about the school</p>
+        <div id="content">
+            <h1>Welcome to {{ school_name }}</h1>
+            <p>
+                <b>Home</b><br />
+                Please utilize the provided account details and verify your log in via your assigned email account.<br />
+                Should you encounter any issues logging in please use the help desk link below for assistance.
+            </p>
+        </div>
     </body>
 </html>
+with open('school_logo.html', 'w') as f:
+    f.write(html_content)

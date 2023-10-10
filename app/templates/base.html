@@ -3,7 +3,7 @@
     <head>
         <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon_default.ico') }}">
         <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-        <title>{% block title %}{% endblock %} | SMS</title>
+        <title>{% block title %}{% endblock %} | {{ school_name }}</title>
         {% block head %}
         {% endblock %}
     </head>
@@ -12,27 +12,29 @@
         <header>
             <!-- This eventually will contain a navbar / banner with links -->
             <!-- Will display only links that the account has access to -->
-            <div>School Logo</div>
+            <a href="{{ url_for('index') }}"><div>School Logo</div></a>
             {% for tab in allowed_tabs %}
                 {% if tab == "login" %}
-                    <div><a href="{{ url_for('login') }}">Log In</a></div>
+                    <a href="{{ url_for('login') }}"><div{{ ' class=current' if selected_tab == "login" else "" }}>Log In</div></a>
                 {% endif %}
                 {% if tab == "dashboard" %}
-                    <div>Dashboard</div>
+                    <div{{ ' class=current' if selected_tab == "dashboard" else "" }}>Dashboard</div>
                 {% endif %}
                 {% if tab == "admin" %}
-                    <div>Admin</div>
+                    <div{{ ' class=current' if selected_tab == "admin" else "" }}>Admin</div>
                 {% endif %}
                 {% if tab == "courses" %}
-                    <div>Courses</div>
+                    <div{{ ' class=current' if selected_tab == "courses" else "" }}>Courses</div>
                 {% endif %}
                 {% if tab == "logout" %}
                     <div>Log Out</div>
                 {% endif %}
             {% endfor %}
         </header>
-        {% block body %}
-        {% endblock %}
+        <div id="content">
+            {% block body %}
+            {% endblock %}
+        </div>
     </body>
 
     {% block scripts %}

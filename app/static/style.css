@@ -1,6 +1,37 @@
+* {
+    --main-color: #19a0fa;
+}
+
+body {
+    padding: 40px 2% 2% 2%;
+}
+
 header {
+    border-bottom: 4px solid #bababa;
     display: flex;
     flex-direction: row;
+    gap: 2%;
+    left: 0;
+    padding: 8px 4%;
+    position: absolute;
+    top: 0;
+    width: 92%;
+}
+header a {
+    text-decoration: none;
+}
+header div {
+    border: 2px solid #00000000;
+    box-sizing: border-box;
+    color: var(--main-color);
+    cursor: pointer;
+    font-size: 20px;
+    padding: 6px;
+}
+header div.current {
+    border: 2px solid var(--main-color);
+    border-radius: 8px;
+    font-weight: bold;
 }
 
 #login_form {
