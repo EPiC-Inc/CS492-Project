@@ -1,11 +1,12 @@
 from flask import render_template, url_for, session, request
 from . import app, config
 from .sql import db
+from .auth import check_passwd
 
 @app.route('/sql') # type: ignore
 def test_sql():
     cursor = db.cursor()
-    response = cursor.execute("getAccountDetail 'admin@sms.com'")
+    response = cursor.execute("getLogin 'admin@sms.com'")
     row = response.fetchone()
     while row:
         return str(row)
@@ -25,11 +26,13 @@ def display_login_page():
 def login():
     #TODO: actually do the logging in
     form = request.form
-    email = form.get('email', '').lower()
-    #passwd = 
+    email = form.get('email', '').strip().lower()
+    passwd = form.get('password', '')
     if (email == config.default_user.lower()) and ():
         #TODO: Check if the user is already in the database
         # Otherwise, check if the passwd is the default
         #    passwd and add the user to the database
         ...
+    if check_passwd(passwd):
+        return "YAY!"
     return "Not implemented", 501
