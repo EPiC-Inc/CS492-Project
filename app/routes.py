@@ -1,5 +1,15 @@
 from flask import render_template, url_for, session, request
 from . import app, config
+from .sql import db
+
+@app.route('/sql') # type: ignore
+def test_sql():
+    cursor = db.cursor()
+    response = cursor.execute("getAccountDetail 'admin@sms.com'")
+    row = response.fetchone()
+    while row:
+        return str(row)
+        row = cursor.fetchone()
 
 @app.route('/')
 def index():
