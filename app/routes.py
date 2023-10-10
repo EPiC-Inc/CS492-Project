@@ -16,7 +16,8 @@ def login():
     #TODO: actually do the logging in
     form = request.form
     email = form.get('email', '').lower()
-    if email == config.default_user.lower():
+    #passwd = 
+    if (email == config.default_user.lower()) and ():
         #TODO: Check if the user is already in the database
         # Otherwise, check if the passwd is the default
         #    passwd and add the user to the database
