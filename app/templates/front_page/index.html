@@ -12,7 +12,7 @@
 
     <body>
         <header>
-            <img src="path_to_your_image.jpg" alt="School Logo">
+            <img src="{{ url_for('static', filename='school logo cs492.png') }}" height="40px" width="40px" />
             <a href="{{ url_for('index') }}"><div class="current" >Home</div></a>
             <a href="{{ url_for('login') }}"><div>Log In</div></a>
         </header>
@@ -26,5 +26,3 @@
         </div>
     </body>
 </html>
-with open('school_logo.html', 'w') as f:
-    f.write(html_content)

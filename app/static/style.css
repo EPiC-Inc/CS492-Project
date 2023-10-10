@@ -33,6 +33,9 @@ header div.current {
     border-radius: 8px;
     font-weight: bold;
 }
+header img {
+    border: none;
+}
 
 #login_form {
     border: 2px solid #979797;
