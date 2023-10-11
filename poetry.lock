@@ -1,4 +1,16 @@
 [[package]]
+name = "bcrypt"
+version = "4.0.1"
+description = "Modern password hashing for your software and your servers"
+category = "main"
+optional = false
+python-versions = ">=3.6"
+
+[package.extras]
+tests = ["pytest (>=3.2.1,!=3.3.0)"]
+typecheck = ["mypy"]
+
+[[package]]
 name = "blinker"
 version = "1.6.2"
 description = "Fast, simple object-to-object and broadcast signaling"
@@ -804,9 +816,10 @@ testing = ["pytest (>=6)", "pytest-checkdocs (>=2.4)", "pytest-cov", "pytest-ena
 [metadata]
 lock-version = "1.1"
 python-versions = ">=3.10.0,<3.12"
-content-hash = "b04714e3921c8b79b130d62b58c306ecb6a71b749634e4e4297cf3ef8f1ba6f6"
+content-hash = "70ceaa587056f5402331913600a6c7d3073dd1833612030f329462d9bcc6abe0"
 
 [metadata.files]
+bcrypt = []
 blinker = []
 cachecontrol = []
 cachy = []
