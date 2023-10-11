@@ -1,6 +1,6 @@
 { pkgs }: {
   deps = [
-    pkgs.unixODBC
+    pkgs.unixODBCDrivers.msodbcsql17
     pkgs.python310Full
     pkgs.replitPackages.prybar-python310
     pkgs.replitPackages.stderred
