@@ -16,8 +16,7 @@ def check_passwd(email: str, password: str | bytes) -> bool:
 
     if isinstance(password, str):
         password = password.encode('ascii')
-    if answer:
-        return checkpw(password, password_hash.encode('ascii'))
+    return checkpw(password, password_hash.encode('ascii'))
 
     return False
 

@@ -1,5 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
 * {
     --main-color: #19a0fa;
+    font-family: 'Montserrat', sans-serif;
 }
 
 body {
@@ -60,7 +63,7 @@ header img {
     padding: 4px 12px;
 }
 #login_form form input[type="submit"] {
-    background-color: #19a0fa;
+    background-color: var(--main-color);
     border: none;
     border-radius: 6px;
     color: white;
