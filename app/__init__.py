@@ -1,7 +1,8 @@
-from flask import Flask
 from configparser import ConfigParser
-from types import SimpleNamespace
 from os import environ
+from types import SimpleNamespace
+
+from flask import Flask
 
 app = Flask(__name__)
 
@@ -13,7 +14,7 @@ config = SimpleNamespace(**config_parser.defaults())
 app.secret_key = environ['MGMT_SECRET_KEY']
 
 @app.context_processor
-def allow_access_in_templates():
+def allow_access_to_global_variables_in_templates() -> dict:
     return {
         "school_name": config.school_name
     }

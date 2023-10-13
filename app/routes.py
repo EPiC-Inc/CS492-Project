@@ -1,7 +1,9 @@
-from flask import render_template, url_for, session, request
+from flask import render_template, request, session, url_for
+
 from . import app, config
-from .sql import db
 from .auth import check_passwd
+from .sql import db
+
 
 @app.route('/sql') # type: ignore
 def test_sql():
@@ -28,11 +30,11 @@ def login():
     form = request.form
     email = form.get('email', '').strip().lower()
     passwd = form.get('password', '')
-    if (email == config.default_user.lower()) and ():
+    if (email == config.default_user.lower()) and (False):
         #TODO: Check if the user is already in the database
         # Otherwise, check if the passwd is the default
         #    passwd and add the user to the database
         ...
-    if check_passwd(passwd):
+    if check_passwd(email, passwd):
         return "YAY!"
     return "Not implemented", 501

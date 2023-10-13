@@ -1,6 +1,8 @@
-import pyodbc
-from . import app, config
 from os import environ
+
+import pyodbc
+
+from . import app, config
 
 # Set up the database connection
 server = config.database_url
