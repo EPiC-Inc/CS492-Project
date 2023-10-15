@@ -1,4 +1,5 @@
 from os import environ
+from unittest import result
 
 import pyodbc
 
@@ -12,3 +13,12 @@ password = environ['SCHOOL_MANAGEMENT_DB_PASS']
 driver = config.database_driver
 
 db = pyodbc.connect('DRIVER='+driver+';PORT=1433;SERVER='+server+';PORT=1443;DATABASE='+database+';UID='+username+';PWD='+ password)
+
+def execute_on_db(command) -> list:
+    #FIXME: SQLi
+    result = []
+    cursor = db.cursor()
+    response = cursor.execute(command)
+    while (row := cursor.fetchone()):
+        result.append(row)
+    return result

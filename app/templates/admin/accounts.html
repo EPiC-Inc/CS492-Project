@@ -1,11 +1,7 @@
 {% extends "base.html" %}
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Account Management</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+
+{% block title %}Account Management{% endblock %}
+{% block body %}
     <h1>Account Management</h1>
     <div class="container">
         <div class="left-side">
@@ -81,22 +77,24 @@
             <button>Select Class</button>
         </div>
     </div>
-    <script>
-        function showHideRightSide(selectElement) {
-            var rightSideNewStudent = document.getElementById('rightSideNewStudent');
-            var rightSideNewFaculty = document.getElementById('rightSideNewFaculty');
+{% endblock %}
 
-            if (selectElement.value === 'newstudent') {
-                rightSideNewStudent.style.display = 'block';
-                rightSideNewFaculty.style.display = 'none';
-            } else if (selectElement.value === 'newfaculty') {
-                rightSideNewStudent.style.display = 'none';
-                rightSideNewFaculty.style.display = 'block';
-            } else {
-                rightSideNewStudent.style.display = 'none';
-                rightSideNewFaculty.style.display = 'none';
-            }
+{% block scripts %}
+<script>
+    function showHideRightSide(selectElement) {
+        var rightSideNewStudent = document.getElementById('rightSideNewStudent');
+        var rightSideNewFaculty = document.getElementById('rightSideNewFaculty');
+
+        if (selectElement.value === 'newstudent') {
+            rightSideNewStudent.style.display = 'block';
+            rightSideNewFaculty.style.display = 'none';
+        } else if (selectElement.value === 'newfaculty') {
+            rightSideNewStudent.style.display = 'none';
+            rightSideNewFaculty.style.display = 'block';
+        } else {
+            rightSideNewStudent.style.display = 'none';
+            rightSideNewFaculty.style.display = 'none';
         }
-    </script>
-</body>
-</html>
+    }
+</script>
+{% endblock %}

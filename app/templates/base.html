@@ -18,10 +18,10 @@
                     <a href="{{ url_for('login') }}"><div{{ ' class=current' if selected_tab == "login" else "" }}>Log In</div></a>
                 {% endif %}
                 {% if tab == "dashboard" %}
-                    <div{{ ' class=current' if selected_tab == "dashboard" else "" }}>Dashboard</div>
+                    <a href="{{ url_for('index') }}"><div{{ ' class=current' if selected_tab == "dashboard" else "" }}>Dashboard</div></a>
                 {% endif %}
-                {% if tab == "admin" %}
-                    <div{{ ' class=current' if selected_tab == "admin" else "" }}>Admin</div>
+                {% if tab == "manage_accounts" %}
+                    <a href="{{ url_for('account_admin_page') }}"><div{{ ' class=current' if selected_tab == "manage_accounts" else "" }}>Admin</div></a>
                 {% endif %}
                 {% if tab == "courses" %}
                     <div{{ ' class=current' if selected_tab == "courses" else "" }}>Courses</div>

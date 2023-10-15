@@ -1,6 +1,6 @@
 from bcrypt import checkpw, gensalt, hashpw
 
-from .sql import db
+from .sql import db, execute_on_db
 
 
 BCRYPT_HASH_FACTOR = 12

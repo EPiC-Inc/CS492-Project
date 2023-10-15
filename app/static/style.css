@@ -52,6 +52,11 @@ header img {
     padding: 20px 40px;
     width: fit-content;
 }
+#login_form .error {
+    color: darkred;
+    font-size: 20px;
+    margin: auto;
+}
 #login_form form {
     display: flex;
     flex-direction: column;
