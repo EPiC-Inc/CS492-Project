@@ -21,7 +21,7 @@ def index():
     if session.get("logged_in", False):
         role = session.get("role")
         if role == "Faculty Administrator":
-            return render_template("front_page/admin_dashboard.html", allowed_tabs=["dashboard", "manage_accounts"], selected_tab="dashboard")
+            return render_template("front_page/index.html", allowed_tabs=["dashboard", "manage_accounts"], selected_tab="home")
         if role == "Faculty Member":
             return render_template("front_page/professor_dashboard.html")
         if role == "Student":
