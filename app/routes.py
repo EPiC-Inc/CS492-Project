@@ -1,7 +1,7 @@
 from flask import flash, redirect, render_template, request, session, url_for
 
 from . import app, config
-from .auth import check_passwd
+from .auth import check_passwd, generate_passwd
 from .sql import db, execute_on_db
 
 
@@ -34,6 +34,13 @@ def account_admin_page():
 
 @app.route("/admin/accounts", methods=["POST"])
 def modify_account():
+    form = request.form
+    first_name = form.get("firstName")
+    last_name = form.get("lastName")
+    email = form.get("email")
+
+    password = generate_passwd()
+
     return str(request.form)
 
 @app.route('/login', methods=["GET"])
