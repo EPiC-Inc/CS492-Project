@@ -12,7 +12,7 @@
         <header>
             <!-- This eventually will contain a navbar / banner with links -->
             <!-- Will display only links that the account has access to -->
-            <a href="{{ url_for('index') }}"><img src="{{ url_for('static', filename='school logo cs492.png') }}" height="40px" width="40px" /></a>
+            <a href="{{ url_for('index') }}"><img src="{{ url_for('static', filename='logo.jpg') }}" height="40px" width="40px" /></a>
             {% for tab in allowed_tabs %}
                 {% if tab == "login" %}
                     <a href="{{ url_for('login') }}"><div{{ ' class=current' if selected_tab == "login" else "" }}>Log In</div></a>
