@@ -5,7 +5,7 @@ from .auth import check_passwd
 from .sql import db, execute_on_db
 
 
-@app.route('/sql') # type: ignore
+@app.route('/sql') # type: ignore #TEMP
 def test_sql():
     cursor = db.cursor()
     response = cursor.execute("getLogin 'admin@sms.com'")
@@ -28,9 +28,13 @@ def index():
             return render_template("front_page/student_dashboard.html")
     return render_template("front_page/index.html")
 
-@app.route("/admin/accounts")
+@app.route("/admin/accounts", methods=["GET"])
 def account_admin_page():
     return render_template("admin/accounts.html", allowed_tabs=["dashboard", "manage_accounts"], selected_tab="manage_accounts")
+
+@app.route("/admin/accounts", methods=["POST"])
+def modify_account():
+    return str(request.form)
 
 @app.route('/login', methods=["GET"])
 def display_login_page():
