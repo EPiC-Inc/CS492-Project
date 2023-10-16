@@ -81,7 +81,6 @@ def login():
         account_details = query_db(f"getAccountDetail '{email}'")[0]
         session['role'] = account_details[3]
         session['firstname'] = account_details[1]
-        print(session['firstname'])
         return redirect(url_for("index"))
 
     # Case: invalid credentials
