@@ -98,6 +98,9 @@ header img {
 .textbox-input-long {
     width: 250px;
 }
+.textbox-input-medium {
+    width: 75px;
+}
 .textbox-input-short {
     width: 50px;
 }
