@@ -85,3 +85,13 @@ header img {
     font-size: 18px;
     margin: 6px auto;
 }
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Create a 2-column grid */
+    gap: 10px; /* Add some spacing between grid items */
+}
+
+.textbox {
+    padding: 10px;
+    border: 1px solid #ccc;
+}
