@@ -31,6 +31,9 @@ def index():
 
 @app.route("/admin/accounts", methods=["GET"])
 def account_admin_page():
+    roles = execute_on_db("getAccountRoles")
+    roles = map(lambda r: r[1], roles)
+    print(roles)
     return render_template("admin/accounts.html", allowed_tabs=["dashboard", "manage_accounts"], selected_tab="manage_accounts")
 
 @app.route("/admin/accounts", methods=["POST"])
@@ -40,6 +43,7 @@ def modify_account():
     last_name = form.get("lastName")
     email = form.get("email")
     role = form.get("")
+    address_line_1 = form.get("homeAddress")
     password = generate_passwd()
 
     return str(request.form)
