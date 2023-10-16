@@ -87,7 +87,8 @@ header img {
 }
 .grid-container {
     display: grid;
-    grid-template-columns: 1fr 1fr; /* Create a 2-column grid */
+    grid-template-columns: 1fr 2fr; /* Create a 2-column grid */
+    width: fit-content;
     gap: 10px; /* Add some spacing between grid items */
 }
 
