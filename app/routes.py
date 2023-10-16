@@ -41,12 +41,16 @@ def modify_account():
     zip_code = form.get("zipCode", '').replace("'", "''")
     password, hash = generate_passwd()
 
+    if None: #TODO - validate form input
+        flash("Please make sure the form is filled out correctly")
+        return redirect(url_for("account_admin_page"))
+
     print(f"insertAccountDetail '{first_name}', '{last_name}', '{hash}', '{email}', '{role}', '{address_line_1}', '{address_line_2}', '', '{city}', '{state}', '{zip_code}'")
     execute(f"insertAccountDetail '{first_name}', '{last_name}', '{hash}', '{email}', '{role}', '{address_line_1}', '{address_line_2}', '', '{city}', '{state}', '{zip_code}'")
     flash("Account created! Credentials:", 'success')
     flash(f"Email: {email}", 'success')
     flash(f"Password: {password}", 'success')
-    return url_for("account_admin_page")
+    return redirect(url_for("account_admin_page"))
 
 @app.route('/login', methods=["GET"])
 def display_login_page():
