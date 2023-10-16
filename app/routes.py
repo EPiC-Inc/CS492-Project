@@ -22,7 +22,7 @@ def index():
         role = session.get("role")
         print(role)
         if role == "Faculty Administrator":
-            return render_template("front_page/admin_dashboard.html", allowed_tabs=["dashboard", "manage_accounts"], selected_tab="dashboard")
+            return render_template("front_page/admin_dashboard.html", firstname=session.get("firstname"), allowed_tabs=["dashboard", "manage_accounts"], selected_tab="dashboard")
         if role == "Faculty Member":
             return render_template("front_page/professor_dashboard.html")
         if role == "Student":
@@ -72,6 +72,7 @@ def login():
         #TODO: Make this customizable
         account_details = execute_on_db(f"getAccountDetail '{email}'")[0]
         session['role'] = account_details[4]
+        session['firstname'] = account_details[1]
         return redirect(url_for("index"))
 
     # Case: invalid credentials
