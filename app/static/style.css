@@ -89,9 +89,15 @@ header img {
     display: grid;
     grid-template-columns: 1fr 4fr; /* Create a 3-column grid */
     width: fit-content;
-    gap: 10px; /* Add some spacing between grid items */
+    gap: 4px; /* Add some spacing between grid items */
 }
 
 .textbox {
-    padding: 10px;
+    padding: 4px;
+}
+.textbox-input-long {
+    width: 250px;
+}
+.textbox-input-short {
+    width: 50px;
 }
