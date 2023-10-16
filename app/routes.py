@@ -38,6 +38,7 @@ def account_admin_page():
 
 @app.route("/admin/accounts", methods=["POST"])
 def modify_account():
+    #TODO - check if a duplicate account exists
     form = request.form
     first_name = form.get("firstName", '').replace("'", "''")
     last_name = form.get("lastName", '').replace("'", "''")
