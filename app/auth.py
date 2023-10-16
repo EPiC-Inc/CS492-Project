@@ -1,7 +1,7 @@
 import turtle
 from bcrypt import checkpw, gensalt, hashpw
 
-from .sql import db, execute_on_db
+from .sql import db, query_db
 from string import ascii_letters, digits
 from random import choices
 
@@ -25,5 +25,5 @@ def generate_hash(password: str) -> bytes:
 
 def generate_passwd(length: int = 12) -> tuple[str, str]:
     generated_passwd = ''.join(choices(ascii_letters + digits, k=length))
-    hash = str(generate_hash(generated_passwd))
+    hash = generate_hash(generated_passwd).decode()
     return (generated_passwd, hash)

@@ -3,7 +3,7 @@ from flask import flash, redirect, render_template, request, session, url_for
 
 from . import app, config
 from .auth import check_passwd, generate_passwd
-from .sql import db, execute_on_db
+from .sql import db, query_db, execute
 
 
 @app.route('/sql') # type: ignore #TEMP
@@ -31,7 +31,7 @@ def index():
 
 @app.route("/admin/accounts", methods=["GET"])
 def account_admin_page():
-    roles = execute_on_db("getAccountRoles")
+    roles = query_db("getAccountRoles")
     return render_template("admin/accounts.html", 
                            allowed_tabs=["dashboard", "manage_accounts"], selected_tab="manage_accounts",
                            roles=roles)
@@ -50,7 +50,8 @@ def modify_account():
     zip_code = form.get("zipCode", '').replace("'", "''")
     password, hash = generate_passwd()
 
-    execute_on_db(f"insertAccountDetail '{first_name}', '{last_name}', '{hash}', '{email}', '{role}', '{address_line_1}', '{address_line_2}', '', '{city}', '{state}', '{zip_code}'")
+    print(f"insertAccountDetail '{first_name}', '{last_name}', '{hash}', '{email}', '{role}', '{address_line_1}', '{address_line_2}', '', '{city}', '{state}', '{zip_code}'")
+    execute(f"insertAccountDetail '{first_name}', '{last_name}', '{hash}', '{email}', '{role}', '{address_line_1}', '{address_line_2}', '', '{city}', '{state}', '{zip_code}'")
     return str(request.form)
     return url_for("account_admin_page")
 
@@ -76,7 +77,7 @@ def login():
 
         session['logged_in'] = True
         #TODO: Make this customizable
-        account_details = execute_on_db(f"getAccountDetail '{email}'")[0]
+        account_details = query_db(f"getAccountDetail '{email}'")[0]
         session['role'] = account_details[3]
         session['firstname'] = account_details[1]
         return redirect(url_for("index"))
