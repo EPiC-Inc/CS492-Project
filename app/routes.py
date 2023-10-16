@@ -27,7 +27,7 @@ def index():
             return render_template("front_page/professor_dashboard.html")
         if role == "Student":
             return render_template("front_page/student_dashboard.html")
-    return render_template("front_page/index.html")
+    return render_template("front_page/index.html",  allowed_tabs=["login"])
 
 @app.route("/admin/accounts", methods=["GET"])
 def account_admin_page():
@@ -71,7 +71,7 @@ def login():
         session['logged_in'] = True
         #TODO: Make this customizable
         account_details = execute_on_db(f"getAccountDetail '{email}'")[0]
-        session['role'] = account_details[4]
+        session['role'] = account_details[3]
         session['firstname'] = account_details[1]
         return redirect(url_for("index"))
 

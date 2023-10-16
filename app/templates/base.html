@@ -36,8 +36,18 @@
             {% endblock %}
         </div>
         <a href="{{ url_for('index') }}">Home</a>
+        <br>
+        <hr class="divider">
+    <footer>
+        <a href="#home">Home</a>
+        <a href="#about_us">About Us</a>
+        <a href="#help_desk">Help Desk</a>
+        <a href="#resources">Resources</a>
+        <br>
+        &copy; {{ year }} {{ school_name }}. All rights reserved.
+    </footer>
     </body>
-
+    
     {% block scripts %}
     {% endblock %}
 </html>
