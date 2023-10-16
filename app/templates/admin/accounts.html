@@ -12,12 +12,16 @@
             <h2>Create New Account</h2>
             <form action="{{ url_for('account_admin_page') }}" method="post" class="form-inline">
                 <div class="grid-container">
-                    <label for="role">Account Type:</label>
-                    <select id="role" name="role">
-                        {% for role in roles %}
-                            <option value="{{ role[0] }}">{{ role[1] }}</option>
-                        {% endfor %}
-                    </select>
+                    <div class="textbox">
+                        <label for="role">Account Type:</label>
+                    </div>
+                    <div class="textbox">
+                        <select id="role" name="role" class="form-control textbox-input-long">
+                            {% for role in roles %}
+                                <option value="{{ role[0] }}">{{ role[1] }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
                 
                     <div class="textbox">
                         <label for="firstName">First Name:</label>
@@ -65,7 +69,7 @@
                         <label for="zipCode">Zip Code:</label>
                     </div>
                     <div class="textbox">
-                        <input type="text" id="zipCode" name="zipCode" class="form-control textbox-input-long">
+                        <input type="text" id="zipCode" name="zipCode" class="form-control textbox-input-short">
                     </div>
                 </div>
                 <button type="submit" class="btn btn-primary">Create Account</button>
