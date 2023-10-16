@@ -24,5 +24,13 @@
                 Should you encounter any issues logging in please use the help desk link below for assistance.
             </p>
         </div>
+         <footer>
+            <a href="{{ url_for('index') }}">Home</a>
+            <a href="{{ url_for('about_us') }}">About Us</a>
+            <a href="{{ url_for('help_desk') }}">Help Desk</a>
+            <a href="{{ url_for('resources') }}">Resources</a>
+            <br>
+            &copy; {{ year }} {{ school_name }}. All rights reserved.
+        </footer>
     </body>
 </html>
