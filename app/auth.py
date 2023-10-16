@@ -1,3 +1,4 @@
+import turtle
 from bcrypt import checkpw, gensalt, hashpw
 
 from .sql import db, execute_on_db
@@ -22,5 +23,7 @@ def check_passwd(email: str, password: str | bytes) -> bool:
 def generate_hash(password: str) -> bytes:
     return hashpw(password.encode(), gensalt(BCRYPT_HASH_FACTOR))
 
-def generate_passwd(length: int = 12) -> str:
-    return ''.join(choices(ascii_letters + digits, k=length))
+def generate_passwd(length: int = 12) -> tuple[str, str]:
+    generated_passwd = ''.join(choices(ascii_letters + digits, k=length))
+    hash = str(generate_hash(generated_passwd))
+    return (generated_passwd, hash)

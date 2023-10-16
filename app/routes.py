@@ -1,3 +1,4 @@
+from sre_parse import State
 from flask import flash, redirect, render_template, request, session, url_for
 
 from . import app, config
@@ -31,7 +32,6 @@ def index():
 @app.route("/admin/accounts", methods=["GET"])
 def account_admin_page():
     roles = execute_on_db("getAccountRoles")
-    roles = map(lambda r: r[1], roles)
     return render_template("admin/accounts.html", 
                            allowed_tabs=["dashboard", "manage_accounts"], selected_tab="manage_accounts",
                            roles=roles)
@@ -39,14 +39,20 @@ def account_admin_page():
 @app.route("/admin/accounts", methods=["POST"])
 def modify_account():
     form = request.form
-    first_name = form.get("firstName")
-    last_name = form.get("lastName")
-    email = form.get("email")
-    role = form.get("")
-    address_line_1 = form.get("homeAddress")
-    password = generate_passwd()
+    first_name = form.get("firstName", '').replace("'", "''")
+    last_name = form.get("lastName", '').replace("'", "''")
+    email = form.get("email", '').replace("'", "''")
+    role = form.get("role", '3').replace("'", "''")
+    address_line_1 = form.get("homeAddress", '').replace("'", "''")
+    address_line_2 = form.get("secondHomeAddress", '').replace("'", "''")
+    state = form.get("state", '').replace("'", "''")
+    city = form.get("city", '').replace("'", "''")
+    zip_code = form.get("zipCode", '').replace("'", "''")
+    password, hash = generate_passwd()
 
+    execute_on_db(f"insertAccountDetail '{first_name}', '{last_name}', '{hash}', '{email}', '{role}', '{address_line_1}', '{address_line_2}', '', '{city}', '{state}', '{zip_code}'")
     return str(request.form)
+    return url_for("account_admin_page")
 
 @app.route('/login', methods=["GET"])
 def display_login_page():
