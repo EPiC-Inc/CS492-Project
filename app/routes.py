@@ -20,8 +20,9 @@ def index():
     # Otherwise, return the school homepage
     if session.get("logged_in", False):
         role = session.get("role")
+        print(role)
         if role == "Faculty Administrator":
-            return render_template("front_page/admin_dashboard.html", allowed_tabs=["dashboard", "manage_accounts"], selected_tab="Dashboard")
+            return render_template("front_page/admin_dashboard.html", allowed_tabs=["dashboard", "manage_accounts"], selected_tab="dashboard")
         if role == "Faculty Member":
             return render_template("front_page/professor_dashboard.html")
         if role == "Student":
@@ -38,7 +39,7 @@ def modify_account():
     first_name = form.get("firstName")
     last_name = form.get("lastName")
     email = form.get("email")
-
+    role = form.get("")
     password = generate_passwd()
 
     return str(request.form)
@@ -65,7 +66,8 @@ def login():
 
         session['logged_in'] = True
         #TODO: Make this customizable
-        session['role'] = execute_on_db(f"getAccountDetail '{email}'")[0][3]
+        account_details = execute_on_db(f"getAccountDetail '{email}'")[0]
+        session['role'] = account_details[4]
         return redirect(url_for("index"))
 
     # Case: invalid credentials
