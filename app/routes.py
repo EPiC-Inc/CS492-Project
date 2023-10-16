@@ -71,7 +71,7 @@ def login():
         session['logged_in'] = True
         #TODO: Make this customizable
         account_details = execute_on_db(f"getAccountDetail '{email}'")[0]
-        session['role'] = account_details[4]
+        session['role'] = account_details[3]
         return redirect(url_for("index"))
 
     # Case: invalid credentials
