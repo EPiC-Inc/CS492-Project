@@ -20,7 +20,6 @@ def index():
     # Otherwise, return the school homepage
     if session.get("logged_in", False):
         role = session.get("role")
-        print(role)
         if role == "Faculty Administrator":
             return render_template("front_page/admin_dashboard.html", firstname=session.get("firstname"), allowed_tabs=["dashboard", "manage_accounts"], selected_tab="dashboard")
         if role == "Faculty Member":
@@ -33,8 +32,9 @@ def index():
 def account_admin_page():
     roles = execute_on_db("getAccountRoles")
     roles = map(lambda r: r[1], roles)
-    print(roles)
-    return render_template("admin/accounts.html", allowed_tabs=["dashboard", "manage_accounts"], selected_tab="manage_accounts")
+    return render_template("admin/accounts.html", 
+                           allowed_tabs=["dashboard", "manage_accounts"], selected_tab="manage_accounts",
+                           roles=roles)
 
 @app.route("/admin/accounts", methods=["POST"])
 def modify_account():
