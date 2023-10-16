@@ -20,8 +20,6 @@
                 {% if tab == "dashboard" %}
                     <a href="{{ url_for('admin_dashboard') }}"><div{{ ' class=current' if selected_tab == "dashboard" else "" }}>Dashboard</div></a>
                 {% endif %}
-                {% if tab == "home" %}
-                    <a href="{{ url_for('index') }}"><div{{ ' class=current' if selected_tab == "home" else "" }}>Home</div></a>
                 {% endif %}
                 {% if tab == "manage_accounts" %}
                     <a href="{{ url_for('account_admin_page') }}"><div{{ ' class=current' if selected_tab == "manage_accounts" else "" }}>Account Management</div></a>
