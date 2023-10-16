@@ -27,7 +27,7 @@ def index():
             return render_template("front_page/professor_dashboard.html")
         if role == "Student":
             return render_template("front_page/student_dashboard.html")
-    return render_template("front_page/index.html")
+    return render_template("front_page/index.html",  allowed_tabs=["login"])
 
 @app.route("/admin/accounts", methods=["GET"])
 def account_admin_page():
