@@ -1,8 +1,9 @@
+from sre_parse import State
 from flask import flash, redirect, render_template, request, session, url_for
 
 from . import app, config
 from .auth import check_passwd, generate_passwd
-from .sql import db, execute_on_db
+from .sql import db, query_db, execute
 
 
 @app.route('/sql') # type: ignore #TEMP
@@ -30,23 +31,30 @@ def index():
 
 @app.route("/admin/accounts", methods=["GET"])
 def account_admin_page():
-    roles = execute_on_db("getAccountRoles")
-    roles = map(lambda r: r[1], roles)
+    roles = query_db("getAccountRoles")
     return render_template("admin/accounts.html", 
                            allowed_tabs=["dashboard", "manage_accounts"], selected_tab="manage_accounts",
                            roles=roles)
 
 @app.route("/admin/accounts", methods=["POST"])
 def modify_account():
+    #TODO - check if a duplicate account exists
     form = request.form
-    first_name = form.get("firstName")
-    last_name = form.get("lastName")
-    email = form.get("email")
-    role = form.get("")
-    address_line_1 = form.get("homeAddress")
-    password = generate_passwd()
+    first_name = form.get("firstName", '').replace("'", "''")
+    last_name = form.get("lastName", '').replace("'", "''")
+    email = form.get("email", '').replace("'", "''")
+    role = form.get("role", '3').replace("'", "''")
+    address_line_1 = form.get("homeAddress", '').replace("'", "''")
+    address_line_2 = form.get("secondHomeAddress", '').replace("'", "''")
+    state = form.get("state", '').replace("'", "''")
+    city = form.get("city", '').replace("'", "''")
+    zip_code = form.get("zipCode", '').replace("'", "''")
+    password, hash = generate_passwd()
 
+    print(f"insertAccountDetail '{first_name}', '{last_name}', '{hash}', '{email}', '{role}', '{address_line_1}', '{address_line_2}', '', '{city}', '{state}', '{zip_code}'")
+    execute(f"insertAccountDetail '{first_name}', '{last_name}', '{hash}', '{email}', '{role}', '{address_line_1}', '{address_line_2}', '', '{city}', '{state}', '{zip_code}'")
     return str(request.form)
+    return url_for("account_admin_page")
 
 @app.route('/login', methods=["GET"])
 def display_login_page():
@@ -70,7 +78,7 @@ def login():
 
         session['logged_in'] = True
         #TODO: Make this customizable
-        account_details = execute_on_db(f"getAccountDetail '{email}'")[0]
+        account_details = query_db(f"getAccountDetail '{email}'")[0]
         session['role'] = account_details[3]
         session['firstname'] = account_details[1]
         return redirect(url_for("index"))
