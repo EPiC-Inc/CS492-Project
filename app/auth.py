@@ -1,4 +1,3 @@
-import turtle
 from bcrypt import checkpw, gensalt, hashpw
 
 from .sql import db, query_db
