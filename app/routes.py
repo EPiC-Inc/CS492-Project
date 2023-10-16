@@ -5,16 +5,6 @@ from . import app, config
 from .auth import check_passwd, generate_passwd
 from .sql import db, query_db, execute
 
-
-@app.route('/sql') # type: ignore #TEMP
-def test_sql():
-    cursor = db.cursor()
-    response = cursor.execute("getLogin 'admin@sms.com'")
-    row = response.fetchone()
-    while row:
-        return str(row)
-        row = cursor.fetchone()
-
 @app.route('/')
 def index():
     # If logged in, return appropriate dashboard
@@ -51,10 +41,16 @@ def modify_account():
     zip_code = form.get("zipCode", '').replace("'", "''")
     password, hash = generate_passwd()
 
+    if None: #TODO - validate form input
+        flash("Please make sure the form is filled out correctly")
+        return redirect(url_for("account_admin_page"))
+
     print(f"insertAccountDetail '{first_name}', '{last_name}', '{hash}', '{email}', '{role}', '{address_line_1}', '{address_line_2}', '', '{city}', '{state}', '{zip_code}'")
     execute(f"insertAccountDetail '{first_name}', '{last_name}', '{hash}', '{email}', '{role}', '{address_line_1}', '{address_line_2}', '', '{city}', '{state}', '{zip_code}'")
-    return str(request.form)
-    return url_for("account_admin_page")
+    flash("Account created! Credentials:", 'success')
+    flash(f"Email: {email}", 'success')
+    flash(f"Password: {password}", 'success')
+    return redirect(url_for("account_admin_page"))
 
 @app.route('/login', methods=["GET"])
 def display_login_page():
@@ -85,5 +81,5 @@ def login():
         return redirect(url_for("index"))
 
     # Case: invalid credentials
-    flash("Invalid email or password.")
+    flash("Invalid email or password.", 'error')
     return redirect(url_for("login"))
