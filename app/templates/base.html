@@ -37,8 +37,10 @@
                     <a href="{{ url_for('index') }}"><div{{ ' class=current' if selected_tab == "dashboard" else "" }}>Home</div></a>
                 {% endif %}
                 {% if tab == "manage_accounts" %}
-                    <a href="{{ url_for('account_admin_page') if selected_tab != 'manage_accounts' else '#' }}"><div{{ ' class=current' if selected_tab == "manage_accounts" else "" }}>Account Management</div></a>
-                    <!--<a><div{{ ' class=current' if selected_tab == "manage_accounts" else "" }}>Add New</div></a>-->
+                    <a onclick="toggleAccountSubmenu();"><div{{ ' class=current' if selected_tab == "manage_accounts" else "" }}>Account Management</div></a>
+                    <div id="submenu" style="display: none;">
+                        <a><div{{ ' class=current' if selected_tab == "manage_accounts" else "" }}>Add New</div></a>
+                    </div>
                 {% endif %}
                 {% if tab == "courses" %}
                     <div{{ ' class=current' if selected_tab == "courses" else "" }}>Courses</div>
@@ -64,6 +66,17 @@
         &copy; {{ year }} {{ school_name }}. All rights reserved.
     </footer>
     </body>
+
+    <script>
+        function toggleAccountSubmenu() {
+            var submenu = document.getElementById('submenu');
+            if (submenu.style.display === "none") {
+                submenu.style.display = "block";
+            } else {
+                submenu.style.display = "none";
+            }
+        }
+    </script>
     
     {% block scripts %}
     {% endblock %}
