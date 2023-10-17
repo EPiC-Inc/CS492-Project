@@ -10,46 +10,70 @@
             <button>Edit/Delete</button>
             
             <h2>Create New Account</h2>
+            {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="{{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+            {% endwith %}
             <form action="{{ url_for('account_admin_page') }}" method="post" class="form-inline">
                 <div class="grid-container">
-                    <label for="role">Account Type:</label>
-                    <select id="role" name="role">
-                        {% for role in roles %}
-                            <option value="{{ role[0] }}">{{ role[1] }}</option>
-                        {% endfor %}
-                    </select>
+                    <div class="textbox">
+                        <label for="role">Account Type:</label>
+                    </div>
+                    <div class="textbox">
+                        <select id="role" name="role" class="form-control textbox-input-long">
+                            {% for role in roles %}
+                                <option value="{{ role[0] }}">{{ role[1] }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
                 
-                    <div class="grid-container">
+                    <div class="textbox">
                         <label for="firstName">First Name:</label>
-                        <input type="text" id="firstName" name="firstName" class="form-control">
                     </div>
-                    <div class="grid-container">
+                    <div class="textbox">
+                        <input type="text" id="firstName" name="firstName" class="form-control textbox-input-long">
+                    </div>
+                    <div class="textbox">
                         <label for="lastName">Last Name:</label>
-                        <input type="text" id="lastName" name="lastName" class="form-control">
                     </div>
-                    <div class="grid-container">
+                    <div class="textbox">
+                        <input type="text" id="lastName" name="lastName" class="form-control textbox-input-long">
+                    </div>
+                    <div class="textbox">
                         <label for="email">Email Address:</label>
-                        <input type="email" id="email" name="email" class="form-control">
                     </div>
-                    <div class="grid-container">
+                    <div class="textbox">
+                        <input type="email" id="email" name="email" class="form-control textbox-input-long">
+                    </div>
+                    <div class="textbox">
                         <label for="homeAddress">Home Address:</label>
-                        <input type="text" id="homeAddress" name="homeAddress" class="form-control">
                     </div>
-                    <div class="grid-container">
-                        <label for="secondHomeAddress">Second Home Address:</label>
-                        <input type="text" id="secondHomeAddress" name="secondHomeAddress" class="form-control">
+                    <div class="textbox">
+                        <input type="text" id="homeAddress" name="homeAddress" class="form-control textbox-input-long">
                     </div>
-                    <div class="grid-container">
-                        <label for="state">State:</label>
-                        <input type="text" id="state" name="state" class="form-control">
+                    <div class="textbox">
+                        <label for="secondHomeAddress">Address Line 2:</label>
                     </div>
-                    <div class="grid-container">
+                    <div class="textbox">
+                        <input type="text" id="secondHomeAddress" name="secondHomeAddress" class="form-control  textbox-input-long">
+                    </div>
+                    <div class="textbox">
                         <label for="city">City:</label>
-                        <input type="text" id="city" name="city" class="form-control">
                     </div>
-                    <div class="grid-container">
-                        <label for="zipCode">Zip Code:</label>
-                        <input type="text" id="zipCode" name="zipCode" class="form-control">
+                    <div class="textbox">
+                        <input type="text" id="city" name="city" class="form-control textbox-input-long">
+                    </div>
+                    <div class="textbox">
+                        <label for="state">State:</label>
+                   
+                        <input type="text" id="state" name="state" class="form-control textbox-input-short">
+                    </div>
+                    <div class="textbox">
+                        <label for="zipCode">Zip:</label>
+                        <input type="text" id="zipCode" name="zipCode" class="form-control textbox-input-medium">
                     </div>
                 </div>
                 <button type="submit" class="btn btn-primary">Create Account</button>

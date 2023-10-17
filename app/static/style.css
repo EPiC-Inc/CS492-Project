@@ -87,12 +87,20 @@ header img {
 }
 .grid-container {
     display: grid;
-    grid-template-columns: 1fr 2fr; /* Create a 2-column grid */
+    grid-template-columns: 1fr 4fr; /* Create a 3-column grid */
     width: fit-content;
-    gap: 10px; /* Add some spacing between grid items */
+    gap: 4px; /* Add some spacing between grid items */
 }
 
 .textbox {
-    padding: 10px;
-    border: 1px solid #ccc;
+    padding: 4px;
+}
+.textbox-input-long {
+    width: 250px;
+}
+.textbox-input-medium {
+    width: 75px;
+}
+.textbox-input-short {
+    width: 50px;
 }
