@@ -45,7 +45,6 @@ def modify_account():
         flash("Please make sure the form is filled out correctly", 'error')
         return redirect(url_for("account_admin_page"))
 
-    print(f"insertAccountDetail '{first_name}', '{last_name}', '{hash}', '{email}', '{role}', '{address_line_1}', '{address_line_2}', '', '{city}', '{state}', '{zip_code}'")
     execute(f"insertAccountDetail '{first_name}', '{last_name}', '{hash}', '{email}', '{role}', '{address_line_1}', '{address_line_2}', '', '{city}', '{state}', '{zip_code}'")
     flash("Account created! Credentials:", 'success')
     flash(f"Email: {email}", 'success')
