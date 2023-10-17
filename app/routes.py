@@ -42,7 +42,7 @@ def modify_account():
     password, hash = generate_passwd()
 
     if None: #TODO - validate form input
-        flash("Please make sure the form is filled out correctly")
+        flash("Please make sure the form is filled out correctly", 'error')
         return redirect(url_for("account_admin_page"))
 
     print(f"insertAccountDetail '{first_name}', '{last_name}', '{hash}', '{email}', '{role}', '{address_line_1}', '{address_line_2}', '', '{city}', '{state}', '{zip_code}'")
