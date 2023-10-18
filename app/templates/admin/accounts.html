@@ -5,11 +5,12 @@
     <h1>Account Management</h1>
     <div class="container">
         <div class="left-side">
-            <h2>Account Actions</h2>
+            <!--<h2>Account Actions</h2>
             <button>New Account</button>
-            <button>Edit/Delete</button>
-            
+            <button>Edit/Delete</button>-->
+                  
             <h2>Create New Account</h2>
+            <br>
             {% with messages = get_flashed_messages(with_categories=true) %}
             {% if messages %}
                 {% for category, message in messages %}
@@ -20,7 +21,7 @@
             <form action="{{ url_for('account_admin_page') }}" method="post" class="form-inline">
                 <div class="grid-container">
                     <div class="textbox">
-                        <label for="role">Account Type:</label>
+                        <label for="role">Account Type</label>
                     </div>
                     <div class="textbox">
                         <select id="role" name="role" class="form-control textbox-input-long">
@@ -31,48 +32,48 @@
                     </div>
                 
                     <div class="textbox">
-                        <label for="firstName">First Name:</label>
+                        <label for="firstName">First Name</label>
                     </div>
                     <div class="textbox">
                         <input type="text" id="firstName" name="firstName" class="form-control textbox-input-long">
                     </div>
                     <div class="textbox">
-                        <label for="lastName">Last Name:</label>
+                        <label for="lastName">Last Name</label>
                     </div>
                     <div class="textbox">
                         <input type="text" id="lastName" name="lastName" class="form-control textbox-input-long">
                     </div>
                     <div class="textbox">
-                        <label for="email">Email Address:</label>
+                        <label for="email">Email Address</label>
                     </div>
                     <div class="textbox">
                         <input type="email" id="email" name="email" class="form-control textbox-input-long">
                     </div>
                     <div class="textbox">
-                        <label for="homeAddress">Home Address:</label>
+                        <label for="homeAddress">Home Address</label>
                     </div>
                     <div class="textbox">
                         <input type="text" id="homeAddress" name="homeAddress" class="form-control textbox-input-long">
                     </div>
                     <div class="textbox">
-                        <label for="secondHomeAddress">Address Line 2:</label>
+                        
                     </div>
                     <div class="textbox">
                         <input type="text" id="secondHomeAddress" name="secondHomeAddress" class="form-control  textbox-input-long">
                     </div>
                     <div class="textbox">
-                        <label for="city">City:</label>
+                        <label for="city">City</label>
                     </div>
                     <div class="textbox">
                         <input type="text" id="city" name="city" class="form-control textbox-input-long">
                     </div>
                     <div class="textbox">
-                        <label for="state">State:</label>                   
+                        <label for="state">State</label>                   
                      
                     </div>
                     <div class="textbox">
                         <input type="text" id="state" name="state" class="form-control textbox-input-short">
-                        <label for="zipCode" style="padding-left: 10px;">Zip:</label>
+                        <label for="zipCode" style="padding-left: 10px;">Zip</label>
                         <input type="text" id="zipCode" name="zipCode" class="form-control textbox-input-medium">
                     </div>
                 </div>
