@@ -39,7 +39,7 @@
                 {% if tab == "manage_accounts" %}
                     <a onclick="toggleAccountSubmenu();"><div{{ ' class=current' if selected_tab == "manage_accounts" else "" }}>Account Management</div></a>
                     <div id="submenu" style="display: none;">
-                        <a><div{{ ' class=current' if selected_tab == "manage_accounts" else "" }}>Add New</div></a>
+                        <a href="{{ url_for('account_admin_page') }}"><div>Add New</div></a>
                     </div>
                 {% endif %}
                 {% if tab == "courses" %}

@@ -7,13 +7,17 @@
 
 body {
     padding: 60px 2% 2% 2%;
+    font-size: larger;
 }
-
+h1 {
+    font-size: 40px;
+}
 header {
-    border-bottom: 4px solid #bababa;
+    border-bottom: 5px solid #bababa;
+    bottom: 94%;
     display: flex;
     flex-direction: row;
-    gap: 2%;
+    gap: 5%;
     left: 0;
     padding: 8px 4%;
     position: absolute;
@@ -28,7 +32,7 @@ header div {
     box-sizing: border-box;
     color: var(--main-color);
     cursor: pointer;
-    font-size: 20px;
+    font-size: 24px;
     padding: 6px;
 }
 header div.current {
@@ -87,13 +91,14 @@ header img {
 }
 .grid-container {
     display: grid;
-    grid-template-columns: 1fr 4fr; /* Create a 3-column grid */
+    grid-template-columns: 1fr 4fr; /* Create a 5-column grid */
     width: fit-content;
-    gap: 4px; /* Add some spacing between grid items */
+    gap: 10px; /* Add some spacing between grid items */
 }
 
 .textbox {
     padding: 4px;
+    font-weight: bold;
 }
 .textbox-input-long {
     width: 250px;
