@@ -1,4 +1,5 @@
 __pycache__/
+.breakpoints
 .env
 .vscode/
 app/__pycache__/
