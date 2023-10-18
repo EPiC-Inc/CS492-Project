@@ -23,14 +23,14 @@ def index():
 def account_admin_page():
     param_value = request.args.get('action')
     if param_value == "Edit":
-        param_value = 'Edit Existing Account'
+        param_title = 'Edit Existing Account'
     else:
-        param_value = "Create New Account"
+        param_title = "Create New Account"
 
     roles = query_db("getAccountRoles")
     return render_template("admin/accounts.html", 
                            allowed_tabs=["dashboard", "manage_accounts"], selected_tab="manage_accounts",
-                           roles=roles, param_value=param_value)
+                           roles=roles, param_value=param_value, param_title=param_title)
 
 @app.route("/admin/accounts", methods=["POST"])
 def modify_account():
