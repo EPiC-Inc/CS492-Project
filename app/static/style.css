@@ -4,7 +4,6 @@
     --main-color: #19a0fa;
     font-family: 'Montserrat', sans-serif;
 }
-
 body {
     padding: 60px 2% 2% 2%;
     font-size: large;
@@ -57,7 +56,15 @@ header div.current {
 header img {
     border: none;
 }
-
+.submenu {
+    display: none;
+    position:relative;    
+    background: #ffffff;
+    border: 1px solid var(--main-color);
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+}
 #login_form {
     border: 2px solid #979797;
     border-radius: 2px;
