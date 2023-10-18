@@ -21,10 +21,16 @@ def index():
 
 @app.route("/admin/accounts", methods=["GET"])
 def account_admin_page():
+    param_value = request.args.get('action')
+    if param_value == "Edit":
+        param_value = 'Edit Existing Account'
+    else:
+        param_value = "Create New Account"
+
     roles = query_db("getAccountRoles")
     return render_template("admin/accounts.html", 
                            allowed_tabs=["dashboard", "manage_accounts"], selected_tab="manage_accounts",
-                           roles=roles)
+                           roles=roles, param_value=param_value)
 
 @app.route("/admin/accounts", methods=["POST"])
 def modify_account():

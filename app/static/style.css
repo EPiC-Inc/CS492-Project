@@ -56,8 +56,11 @@ header div.current {
 header img {
     border: none;
 }
-.submenu {
+.submenu-top {
     display: none;
+    position:relative;    
+}
+.submenu {
     position:relative;    
     background: #ffffff;
     border: 1px solid var(--main-color);

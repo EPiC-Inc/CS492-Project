@@ -22,9 +22,14 @@
                     <a href="{{ url_for('index') }}"><div{{ ' class=current' if selected_tab == "dashboard" else "" }}>Home</div></a>
                 {% endif %}
                 {% if tab == "manage_accounts" %}
-                    <a onclick="toggleAccountSubmenu();"><div{{ ' class=current' if selected_tab == "manage_accounts" else "" }}>Account Management</div></a>
-                    <div id="submenu" class="submenu" style="left: -360px; top: 50px;">
-                        <a href="{{ url_for('account_admin_page') }}"><div>Add New</div></a>
+                    <a onclick="toggleAccountSubmenu('ManageAccounts');"><div{{ ' class=current' if selected_tab == "manage_accounts" else "" }}>Account Management</div></a>
+                    <div id="ManageAccounts" class="submenu-top">
+                        <div id="AddAccount" class="submenu" style="left: -375px; top: 50px;">
+                            <a href="{{ url_for('account_admin_page') }}"><div>Add New</div></a>
+                        </div>
+                        <div id="EditAccount" class="submenu" style="left: -220px; top: -8px;">
+                            <a href="{{ url_for('account_admin_page', action='Edit') }}"><div>Edit</div></a>
+                        </div>
                     </div>
                 {% endif %}
                 {% if tab == "courses" %}
@@ -54,8 +59,8 @@
     </body>
 
     <script>
-        function toggleAccountSubmenu() {
-            var submenu = document.getElementById('submenu');
+        function toggleAccountSubmenu(menuname) {
+            var submenu = document.getElementById(menuname);
             if (submenu.style.display === "none") {
                 submenu.style.display = "block";
             } else {
