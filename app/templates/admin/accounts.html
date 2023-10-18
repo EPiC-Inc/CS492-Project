@@ -10,7 +10,7 @@
             <button>Edit/Delete</button>-->
                   
             <h2>Create New Account</h2>
-            <br>
+            <br/>
             {% with messages = get_flashed_messages(with_categories=true) %}
             {% if messages %}
                 {% for category, message in messages %}
@@ -29,8 +29,8 @@
                                 <option value="{{ role[0] }}">{{ role[1] }}</option>
                             {% endfor %}
                         </select>
-                        <br>
-                        <br>
+                        <br/>
+                        <br/>
                     </div>
                 
                     <div class="label">
@@ -50,8 +50,8 @@
                     </div>
                     <div class="textbox">
                         <input type="email" id="email" name="email" class="form-control textbox-input-long"  placeholder="School Email Address">
-                        <br>
-                        <br>
+                        <br/>
+                        <br/>
                     </div>
                     <div class="label">
                         <label for="homeAddress">Home Address</label>
@@ -81,7 +81,7 @@
                     </div>
                 </div>
                 <div>
-                    <br>
+                    <br/>
                 <button type="submit" class="btn btn-primary">Create Account</button>
             </div>
             </form>

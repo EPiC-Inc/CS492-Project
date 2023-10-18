@@ -9,6 +9,20 @@ body {
     padding: 60px 2% 2% 2%;
     font-size: large;
 }
+.divider {
+    border-top: 3px solid #ccc;
+    margin: 20px 0;
+}
+footer {
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    width: 95%;
+    padding: 30px 0;
+}
+footer a {
+    margin: 0 20px;
+}
 h1 {
     font-size: 36px;
 }
@@ -128,22 +142,7 @@ header img {
 }
 .dropdown {
     padding: auto;
-    width: 260px;
+    width: 258px;
     font-size: large;
     height: 25px;
-}
-.divider {
-    border-top: 3px solid #ccc;
-    margin: 20px 0;
-}
-    
-footer {
-    text-align: center;
-    position: fixed;
-    bottom: 0;
-    width: 95%;
-    padding: 30px 0;
-}
-footer a {
-    margin: 0 20px;
 }
