@@ -20,64 +20,70 @@
             {% endwith %}
             <form action="{{ url_for('account_admin_page') }}" method="post" class="form-inline">
                 <div class="grid-container">
-                    <div class="textbox">
+                    <div class="label">
                         <label for="role">Account Type</label>
                     </div>
                     <div class="textbox">
-                        <select id="role" name="role" class="form-control textbox-input-long">
+                        <select id="role" name="role" class="form-control dropdown">
                             {% for role in roles %}
                                 <option value="{{ role[0] }}">{{ role[1] }}</option>
                             {% endfor %}
                         </select>
+                        <br>
+                        <br>
                     </div>
                 
-                    <div class="textbox">
+                    <div class="label">
                         <label for="firstName">First Name</label>
                     </div>
                     <div class="textbox">
-                        <input type="text" id="firstName" name="firstName" class="form-control textbox-input-long">
+                        <input type="text" id="firstName" name="firstName" class="form-control textbox-input-long" placeholder="First Name">
                     </div>
-                    <div class="textbox">
+                    <div class="label">
                         <label for="lastName">Last Name</label>
                     </div>
                     <div class="textbox">
-                        <input type="text" id="lastName" name="lastName" class="form-control textbox-input-long">
+                        <input type="text" id="lastName" name="lastName" class="form-control textbox-input-long"  placeholder="Last Name">
                     </div>
-                    <div class="textbox">
+                    <div class="label">
                         <label for="email">Email Address</label>
                     </div>
                     <div class="textbox">
-                        <input type="email" id="email" name="email" class="form-control textbox-input-long">
+                        <input type="email" id="email" name="email" class="form-control textbox-input-long"  placeholder="School Email Address">
+                        <br>
+                        <br>
                     </div>
-                    <div class="textbox">
+                    <div class="label">
                         <label for="homeAddress">Home Address</label>
                     </div>
                     <div class="textbox">
-                        <input type="text" id="homeAddress" name="homeAddress" class="form-control textbox-input-long">
+                        <input type="text" id="homeAddress" name="homeAddress" class="form-control textbox-input-long"  placeholder="Address line 1">
                     </div>
                     <div class="textbox">
                         
                     </div>
                     <div class="textbox">
-                        <input type="text" id="secondHomeAddress" name="secondHomeAddress" class="form-control  textbox-input-long">
+                        <input type="text" id="secondHomeAddress" name="secondHomeAddress" class="form-control  textbox-input-long"  placeholder="Address line 2">
                     </div>
-                    <div class="textbox">
+                    <div class="label">
                         <label for="city">City</label>
                     </div>
                     <div class="textbox">
-                        <input type="text" id="city" name="city" class="form-control textbox-input-long">
+                        <input type="text" id="city" name="city" class="form-control textbox-input-long"  placeholder="City">
                     </div>
-                    <div class="textbox">
+                    <div class="label">
                         <label for="state">State</label>                   
-                     
                     </div>
                     <div class="textbox">
-                        <input type="text" id="state" name="state" class="form-control textbox-input-short">
-                        <label for="zipCode" style="padding-left: 10px;">Zip</label>
-                        <input type="text" id="zipCode" name="zipCode" class="form-control textbox-input-medium">
+                        <input type="text" id="state" name="state" class="form-control textbox-input-short"  placeholder="State">
+                        <label for="zipCode" class="label" style="padding-left: 10px;">Zip</label>
+                        <input type="text" id="zipCode" name="zipCode" class="form-control textbox-input-medium"  placeholder="Zip Code">
                     </div>
                 </div>
+                <div>
+                    <br>
                 <button type="submit" class="btn btn-primary">Create Account</button>
+            </div>
             </form>
          </div>
         <!-- Show different right-side content based on selection -->

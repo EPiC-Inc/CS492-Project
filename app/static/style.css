@@ -7,14 +7,14 @@
 
 body {
     padding: 60px 2% 2% 2%;
-    font-size: larger;
+    font-size: large;
 }
 h1 {
-    font-size: 40px;
+    font-size: 36px;
 }
 header {
-    border-bottom: 5px solid #bababa;
-    bottom: 94%;
+    border-bottom: 3px solid #bababa;
+    bottom: 92%;
     display: flex;
     flex-direction: row;
     gap: 5%;
@@ -91,21 +91,59 @@ header img {
 }
 .grid-container {
     display: grid;
-    grid-template-columns: 1fr 4fr; /* Create a 5-column grid */
-    width: fit-content;
-    gap: 10px; /* Add some spacing between grid items */
+    grid-template-columns: 20% 80%; /* Create a 5-column grid */
+    /*width: fit-content;*/
+    /*gap: 6px; Add some spacing between grid items */
 }
-
-.textbox {
+.label {
     padding: 4px;
     font-weight: bold;
 }
+.textbox {
+    padding: 4px;
+}    
 .textbox-input-long {
     width: 250px;
+    font-size: large;
+    height: 20px;
 }
 .textbox-input-medium {
+    font-size: large;
+    height: 20px;
     width: 120px;
 }
 .textbox-input-short {
-    width: 75px;
+    font-size: large;
+    height: 20px;
+    width: 70px;
+}
+.btn-primary {
+    padding: 10px;
+    font-size: large;
+    background: var(--main-color);
+    color:#ffffff;
+    border-radius:10px;
+    cursor:pointer;
+    border: none;
+}
+.dropdown {
+    padding: auto;
+    width: 260px;
+    font-size: large;
+    height: 25px;
+}
+.divider {
+    border-top: 3px solid #ccc;
+    margin: 20px 0;
+}
+    
+footer {
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    width: 95%;
+    padding: 30px 0;
+}
+footer a {
+    margin: 0 20px;
 }
