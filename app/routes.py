@@ -32,7 +32,7 @@ def account_admin_page():
     roles = query_db("getAccountRoles")
     return render_template("admin/accounts.html", 
                            allowed_tabs=["dashboard", "manage_accounts"], selected_tab="manage_accounts",
-                           roles=roles, param_value=action)
+                           roles=roles, action=action)
 
 @app.route("/admin/accounts", methods=["POST"])
 def modify_account():
