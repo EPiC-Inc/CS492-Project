@@ -23,20 +23,19 @@ def index():
 
 @app.route("/admin/accounts", methods=["GET"])
 def account_admin_page():
-    param_value = request.args.get('action')
-    if param_value == "Edit":
-        param_value = 'Edit Existing Account'
+    action = request.args.get('action')
+    if action == "Edit":
+        action = 'Edit Existing Account'
     else:
-        param_value = "Create New Account"
+        action = "Create New Account"
 
     roles = query_db("getAccountRoles")
     return render_template("admin/accounts.html", 
                            allowed_tabs=["dashboard", "manage_accounts"], selected_tab="manage_accounts",
-                           roles=roles, param_value=param_value)
+                           roles=roles, param_value=action)
 
 @app.route("/admin/accounts", methods=["POST"])
 def modify_account():
-    #TODO - check if a duplicate account exists
     form = request.form
     first_name = form.get("firstName", '').replace("'", "''")
     last_name = form.get("lastName", '').replace("'", "''")
@@ -48,6 +47,11 @@ def modify_account():
     city = form.get("city", '').replace("'", "''")
     zip_code = form.get("zipCode", '').replace("'", "''")
     password, hash = generate_passwd()
+
+    # Check if a duplicate account exists
+    if bool(query_db(f"getAccountDetail '{email}'")):
+        flash("An account with this email already exists", 'error')
+        return redirect(url_for("account_admin_page"))
 
     if None: #TODO - validate form input
         flash("Please make sure the form is filled out correctly", 'error')
@@ -77,7 +81,7 @@ def login():
     if check_passwd(email, passwd):
         # Assign role to the user
         #NOTE: These use Flask's secure cookies, which are tamper-resistent.
-        #TODO: Validate role on sensitive operations.
+        #NOTE: Validate role on sensitive operations.
 
         session['logged_in'] = True
         #TODO: Make this customizable
