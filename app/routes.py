@@ -1,15 +1,17 @@
 from sre_parse import State
+
 from flask import flash, redirect, render_template, request, session, url_for
 
 from . import app, config
 from .auth import check_passwd, generate_passwd
-from .sql import db, query_db, execute
+from .sql import db, execute_db, query_db
+
 
 @app.route('/')
 def index():
     # If logged in, return appropriate dashboard
     # Otherwise, return the school homepage
-    if session.get("logged_in", False):
+    if session.get("logged_in"):
         role = session.get("role")
         if role == "Faculty Administrator":
             return render_template("front_page/admin_dashboard.html", firstname=session.get("firstname"), allowed_tabs=["dashboard", "manage_accounts"], selected_tab="dashboard")
@@ -21,20 +23,19 @@ def index():
 
 @app.route("/admin/accounts", methods=["GET"])
 def account_admin_page():
-    param_value = request.args.get('action')
-    if param_value == "Edit":
-        param_title = 'Edit Existing Account'
+    action = request.args.get('action')
+    if action == "Edit":
+        action = 'Edit Existing Account'
     else:
-        param_title = "Create New Account"
+        action = "Create New Account"
 
     roles = query_db("getAccountRoles")
     return render_template("admin/accounts.html", 
                            allowed_tabs=["dashboard", "manage_accounts"], selected_tab="manage_accounts",
-                           roles=roles, param_value=param_value, param_title=param_title)
+                           roles=roles, action=action)
 
 @app.route("/admin/accounts", methods=["POST"])
 def modify_account():
-    #TODO - check if a duplicate account exists
     form = request.form
     first_name = form.get("firstName", '').replace("'", "''")
     last_name = form.get("lastName", '').replace("'", "''")
@@ -47,11 +48,30 @@ def modify_account():
     zip_code = form.get("zipCode", '').replace("'", "''")
     password, hash = generate_passwd()
 
+    # Check if a duplicate account exists
+    if bool(query_db("getAccountDetail :email",
+                     email=email
+                     )):
+        flash("An account with this email already exists", 'error')
+        return redirect(url_for("account_admin_page"))
+
     if None: #TODO - validate form input
         flash("Please make sure the form is filled out correctly", 'error')
         return redirect(url_for("account_admin_page"))
 
-    execute(f"insertAccountDetail '{first_name}', '{last_name}', '{hash}', '{email}', '{role}', '{address_line_1}', '{address_line_2}', '', '{city}', '{state}', '{zip_code}'")
+    execute_db("insertAccountDetail :first_name, :last_name, :hash, :email, :role, :address_line_1, :address_line_2, :address_line_3, :city, :state, :zip_code",
+               first_name = first_name,
+               last_name = last_name,
+               hash = hash,
+               email = email,
+               role = role,
+               address_line_1 = address_line_1,
+               address_line_2 = address_line_2,
+               address_line_3 = '',
+               city = city,
+               state = state,
+               zip_code = zip_code
+               )
     flash("Account created! Credentials:", 'success')
     flash(f"Email: {email}", 'success')
     flash(f"Password: {password}", 'success')
@@ -75,7 +95,7 @@ def login():
     if check_passwd(email, passwd):
         # Assign role to the user
         #NOTE: These use Flask's secure cookies, which are tamper-resistent.
-        #TODO: Validate role on sensitive operations.
+        #NOTE: Validate role on sensitive operations.
 
         session['logged_in'] = True
         #TODO: Make this customizable

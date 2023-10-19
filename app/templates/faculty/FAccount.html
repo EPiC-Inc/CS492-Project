@@ -1,1 +1,37 @@
 {% extends "base.html" %}
+{% block title %}Grades/Attendance Managment {% endblock %}
+    {% block body %}
+    <h1>Grades / Attendance</h1>
+    <div class="container">
+        <div class="left-side">
+            <h2>Select Student</h2>
+            <select name="student" id="student-select">
+                <!-- Add options for other students -->
+            </select>
+        </div>
+        <div class="right-side">
+            <h2>Assignment</h2>
+            <select name="assignment" id="assignment-select">
+                <!-- Add options for other assignments -->
+            </select>
+            <div class="score-percent">
+                <label for="score">Score Percent:</label>
+                <input type="text" id="score" name="score">
+            </div>
+            <div class="overall-grade-percent">
+                <label for="overall-grade">Overall Grade Percent:</label>
+                <input type="text" id="overall-grade" name="overall-grade">
+            </div>
+            <div class="date-and-attendance">
+                <label for="select-date">Select Date:</label>
+                <input type="date" id="select-date" name="select-date">
+                <div class="attendance-options">
+                    <label for="present">Present</label>
+                    <input type="checkbox" id="present" name="attendance" value="present">
+                    <label for="absent">Absent</label>
+                    <input type="checkbox" id="absent" name="attendance" value="absent">
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

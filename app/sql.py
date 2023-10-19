@@ -1,30 +1,67 @@
 from os import environ
-from unittest import result
 
-import pyodbc
+from sqlalchemy import create_engine
+from sqlalchemy.engine import URL
+from sqlalchemy.sql import text
+from sqlalchemy.exc import ResourceClosedError
 
 from . import app, config
 
 # Set up the database connection
-server = config.database_url
-database = config.database_name
+dialect = config.database_dialect
+framework = config.database_framework
 username = config.database_user
 password = environ['SCHOOL_MANAGEMENT_DB_PASS']
+server = config.database_url
+port = config.database_port
+database = config.database_name
 driver = config.database_driver
 
-db = pyodbc.connect('DRIVER='+driver+';PORT=1433;SERVER='+server+';PORT=1443;DATABASE='+database+';UID='+username+';PWD='+ password)
+database_url = URL.create(
+    f"{dialect}+{framework}",
+    username = username,
+    password = password,
+    host = server,
+    port = port,
+    database = database,
+    query = {
+        "driver": driver
+    } if driver else {}
+)
 
-def query_db(command) -> list:
-    #FIXME: SQLi
+db = create_engine(database_url)
+
+# with db.begin() as cursor:
+#     result = cursor.execute(text("getLogin :email"), {"email": "admin@sms.com"})
+#     for row in result:
+#         print("a:", row)
+
+# with db.connect() as cursor:
+#     result = cursor.execute(text("getLogin :email"), {"email": "admin@sms.com"})
+#     for row in result:
+#         print("a:", row)
+
+# db = pyodbc.connect('DRIVER='+driver+';PORT=1433;SERVER='+server+';PORT=1443;DATABASE='+database+';UID='+username+';PWD='+ password)
+
+def query_db(command: str, **kwargs) -> list:
+    ''' <command> is entered as storedProcedure :argument1, :argument2 \n
+     <kwargs> will fill in the arguments i.e. argument1='blah' '''
     result = []
-    cursor = db.cursor()
-    response = cursor.execute(command)
-    while (row := cursor.fetchone()):
-        result.append(row)
+    with db.connect() as cursor:
+        response = cursor.execute(text(command), kwargs)
+        for row in response:
+            result.append(row)
     return result
 
-def execute(command) -> None:
-    #FIXME: SQLi
-    cursor = db.cursor()
-    response = cursor.execute(command)
-    cursor.commit()
+def execute_db(command: str, **kwargs) -> list:
+    ''' <command> is entered as storedProcedure :argument1, :argument2 \n
+     <kwargs> will fill in the arguments i.e. argument1='blah' '''
+    result = []
+    with db.begin() as cursor:
+        response = cursor.execute(text(command), kwargs)
+        try:
+            for row in response:
+                result.append(row)
+        except ResourceClosedError:
+            pass
+    return result

@@ -8,7 +8,7 @@
             <!--<h2>Account Actions</h2>
             <button>New Account</button>
             <button>Edit/Delete</button>-->
-            <h2>{{ param_title }}</h2>
+            <h2>{{ action }}</h2>
             <br/>
             {% with messages = get_flashed_messages(with_categories=true) %}
             {% if messages %}
@@ -17,7 +17,24 @@
                 {% endfor %}
             {% endif %}
             {% endwith %}
-            <form action="{{ url_for('account_admin_page') }}" method="post" class="form-inline">
+
+            {% if action.lower().startswith('edit') %}
+                <form onsubmit="populateAccountForm(); return false;">
+                    <label for="search_criteria">Search by</label>
+                    <select id="search_criteria" name="search_criteria">
+                        <option value="email">Email</option>
+                        <option value="last_name">Last Name</option>
+                    </select>
+                    <input type="text" id="to_find">
+                    <input type="submit" value="Go">
+                </form>
+                <style>
+                    #account_form {
+                        display: none;
+                    }
+                </style>
+            {% endif %}
+            <form action="{{ url_for('account_admin_page') }}" method="post" class="form-inline" id="account_form">
                 <div class="grid-container">
                     <div class="label">
                         <label for="role">Account Type</label>
@@ -111,6 +128,17 @@
 {% endblock %}
 
 {% block scripts %}
+<script>
+    // This is to populate the account form when editing
+    function populateAccountForm() {
+        // clear error element
+        //TODO - request feedback from the server
+        // if the account exists:
+        document.getElementById('account_form').style.display='block';
+        // else pull up an error
+    }
+</script>
+
 <script>
     function showHideRightSide(selectElement) {
         var rightSideNewStudent = document.getElementById('rightSideNewStudent');

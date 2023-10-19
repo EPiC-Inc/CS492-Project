@@ -20,3 +20,6 @@ def allow_access_to_global_variables_in_templates() -> dict:
     }
 
 from . import routes
+
+from .api import api
+app.register_blueprint(api, url_prefix='/api')
