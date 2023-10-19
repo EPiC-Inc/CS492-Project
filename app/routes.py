@@ -4,7 +4,7 @@ from flask import flash, redirect, render_template, request, session, url_for
 
 from . import app, config
 from .auth import check_passwd, generate_passwd
-from .sql import db, execute, query_db
+from .sql import db, execute_db, query_db
 
 
 @app.route('/')
@@ -49,7 +49,9 @@ def modify_account():
     password, hash = generate_passwd()
 
     # Check if a duplicate account exists
-    if bool(query_db(f"getAccountDetail '{email}'")):
+    if bool(query_db("getAccountDetail :email",
+                     email=email
+                     )):
         flash("An account with this email already exists", 'error')
         return redirect(url_for("account_admin_page"))
 
@@ -57,7 +59,19 @@ def modify_account():
         flash("Please make sure the form is filled out correctly", 'error')
         return redirect(url_for("account_admin_page"))
 
-    execute(f"insertAccountDetail '{first_name}', '{last_name}', '{hash}', '{email}', '{role}', '{address_line_1}', '{address_line_2}', '', '{city}', '{state}', '{zip_code}'")
+    execute_db("insertAccountDetail :first_name, :last_name, :hash, :email, :role, :address_line_1, :address_line_2, :address_line_3, :city, :state, :zip_code",
+               first_name = first_name,
+               last_name = last_name,
+               hash = hash,
+               email = email,
+               role = role,
+               address_line_1 = address_line_1,
+               address_line_2 = address_line_2,
+               address_line_3 = '',
+               city = city,
+               state = state,
+               zip_code = zip_code
+               )
     flash("Account created! Credentials:", 'success')
     flash(f"Email: {email}", 'success')
     flash(f"Password: {password}", 'success')

@@ -1,10 +1,8 @@
 from os import environ
+
 from sqlalchemy import create_engine
 from sqlalchemy.engine import URL
 from sqlalchemy.sql import text
-from unittest import result
-
-import pyodbc
 
 from . import app, config
 
@@ -18,46 +16,46 @@ port = config.database_port
 database = config.database_name
 driver = config.database_driver
 
-# database_url = URL.create(
-#     f"{dialect}+{framework}",
-#     username = username,
-#     password = password,
-#     host = server,
-#     port = port,
-#     database = database,
-#     query = {
-#         "driver": driver
-#     } if driver else {}
-# )
+database_url = URL.create(
+    f"{dialect}+{framework}",
+    username = username,
+    password = password,
+    host = server,
+    port = port,
+    database = database,
+    query = {
+        "driver": driver
+    } if driver else {}
+)
 
-# engine = create_engine(database_url)
-# with engine.begin() as cursor:
-#     result = cursor.execute(text("getLogin"), [("?", "admin@sms.com")])
+db = create_engine(database_url)
+
+# with db.begin() as cursor:
+#     result = cursor.execute(text("getLogin :email"), {"email": "admin@sms.com"})
 #     for row in result:
-#         print("a:", row.username)
+#         print("a:", row)
 
-# with engine.connect() as cursor:
-#     result = cursor.execute(text("getLogin"), ('admin@sms.com'))
+# with db.connect() as cursor:
+#     result = cursor.execute(text("getLogin :email"), {"email": "admin@sms.com"})
 #     for row in result:
-#         print("username:", row.username)
- 
+#         print("a:", row)
 
-# exit()
+# db = pyodbc.connect('DRIVER='+driver+';PORT=1433;SERVER='+server+';PORT=1443;DATABASE='+database+';UID='+username+';PWD='+ password)
 
-
-db = pyodbc.connect('DRIVER='+driver+';PORT=1433;SERVER='+server+';PORT=1443;DATABASE='+database+';UID='+username+';PWD='+ password)
-
-def query_db(command) -> list:
-    #FIXME: SQLi
+def query_db(command: str, **kwargs) -> list:
+    ''' <command> is entered as storedProcedure :argument1, :argument2 '''
     result = []
-    cursor = db.cursor()
-    response = cursor.execute(command)
-    while (row := cursor.fetchone()):
-        result.append(row)
+    with db.connect() as cursor:
+        response = cursor.execute(text(command), kwargs)
+        for row in response:
+            result.append(row)
     return result
 
-def execute(command) -> None:
-    #FIXME: SQLi
-    cursor = db.cursor()
-    response = cursor.execute(command)
-    cursor.commit()
+def execute_db(command: str, **kwargs) -> list:
+    ''' <command> is entered as storedProcedure :argument1, :argument2 '''
+    result = []
+    with db.begin() as cursor:
+        response = cursor.execute(text(command), kwargs)
+        for row in response:
+            result.append(row)
+    return result

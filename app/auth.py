@@ -7,13 +7,10 @@ from random import choices
 BCRYPT_HASH_FACTOR = 12
 
 def check_passwd(email: str, password: str | bytes) -> bool:
-    #FIXME - sanitize input
-    cursor = db.cursor()
-    response = cursor.execute(f"getLogin '{email}'")
-    answer = response.fetchone()
-    if answer is None:
+    answer = query_db('getLogin :email', email=email)
+    if not bool(answer):
         return False
-    password_hash: str = answer[1]
+    password_hash: str = answer[0][1]
 
     if isinstance(password, str):
         password = password.encode('ascii')
