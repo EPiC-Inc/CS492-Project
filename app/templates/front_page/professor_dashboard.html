@@ -1,1 +1,14 @@
 {% extends "base.html" %}
+
+{% block title %}Faculty Home Page{% endblock %}
+
+{% block body %}
+<h1>Welcome to {{ school_name }}</h1>
+<p class="body">
+    <b>Home</b><br /><br/>
+    You are logged in as {{ firstname }}</br></br>
+    Please utilize the provided account details and verify your log in via your assigned email account.<br />
+    Should you encounter any issues logging in please use the help desk link below for assistance.
+</p>
+
+{% endblock %}
