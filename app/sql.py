@@ -3,6 +3,7 @@ from os import environ
 from sqlalchemy import create_engine
 from sqlalchemy.engine import URL
 from sqlalchemy.sql import text
+from sqlalchemy.exc import ResourceClosedError
 
 from . import app, config
 
@@ -56,6 +57,9 @@ def execute_db(command: str, **kwargs) -> list:
     result = []
     with db.begin() as cursor:
         response = cursor.execute(text(command), kwargs)
-        for row in response:
-            result.append(row)
+        try:
+            for row in response:
+                result.append(row)
+        except ResourceClosedError:
+            pass
     return result
