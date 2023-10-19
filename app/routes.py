@@ -1,9 +1,11 @@
 from sre_parse import State
+
 from flask import flash, redirect, render_template, request, session, url_for
 
 from . import app, config
 from .auth import check_passwd, generate_passwd
-from .sql import db, query_db, execute
+from .sql import db, execute, query_db
+
 
 @app.route('/')
 def index():
