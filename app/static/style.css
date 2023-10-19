@@ -25,6 +25,9 @@ footer a {
 h1 {
     font-size: 36px;
 }
+h2 {
+    font-size: 24px;
+}
 header {
     border-bottom: 3px solid #bababa;
     bottom: 94%;

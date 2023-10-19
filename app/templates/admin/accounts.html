@@ -19,17 +19,42 @@
             {% endwith %}
 
             {% if action.lower().startswith('edit') %}
-                <form onsubmit="populateAccountForm(); return false;">
-                    <label for="search_criteria">Search by</label>
-                    <select id="search_criteria" name="search_criteria">
-                        <option value="email">Email</option>
-                        <option value="last_name">Last Name</option>
-                    </select>
-                    <input type="text" id="to_find">
-                    <input type="submit" value="Go">
+            <form onsubmit="getSearchResults(); return false;">
+                    <label for="search_criteria" class="label">Account Search</label>
+                    <input type="text" id="to_find" class="textbox-input-long" placeholder="Last Name or email">
+                    <input type="submit" value="Go" class="btn btn-primary">
+                </br>
+                </form>
+                <form onsubmit="populateAccountForm(); return false;" id="show_search_results">
+                    <div id="search_results">
+                        <label for="search_results" class="label">Results</label>
+                        <table border="1">
+                            <tr>
+                                <th></th>
+                                <th>First Name</th>
+                                <th>Last Name</th>
+                                <th>Email</th>
+                                <th>Role</th>
+                            </tr>
+                            {% for row in results %}
+                            <tr>
+                                <td>
+                                    <input type="submit" value="Select" class="btn btn-primary"></td>
+                                <td>{{ row[0] }}</td>
+                                <td>{{ row[1] }}</td>
+                                <td>{{ row[2] }}</td>
+                                <td>{{ row[3] }}</td>
+                            </tr>
+                            {% endfor %}    
+                        </table>
+                    </div>
+                </br>
                 </form>
                 <style>
                     #account_form {
+                        display: none;
+                    }
+                    #show_search_results {
                         display: none;
                     }
                 </style>
@@ -129,11 +154,19 @@
 
 {% block scripts %}
 <script>
+    function getSearchResults() {
+        // This gets the search results and displays them
+        //TODO - call the API and populate the table
+        // Add a select button that then select the account they want to edit
+        document.getElementById('show_search_results').style.display='block';
+        
+    }
     // This is to populate the account form when editing
     function populateAccountForm() {
         // clear error element
         //TODO - request feedback from the server
         // if the account exists:
+        document.getElementById('show_search_results').style.display='none';
         document.getElementById('account_form').style.display='block';
         // else pull up an error
     }

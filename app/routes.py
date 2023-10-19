@@ -25,7 +25,7 @@ def index():
 def account_admin_page():
     action = request.args.get('action')
     if action == "Edit":
-        action = 'Edit Existing Account'
+        action = "Edit Existing Account"
     else:
         action = "Create New Account"
 
