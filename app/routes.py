@@ -15,11 +15,11 @@ def index():
     # Otherwise, return the school homepage
     if session.get("logged_in"):
         role = session.get("role")
-        if role == "Faculty Administrator":
+        if role == 1:
             return render_template("front_page/admin_dashboard.html", firstname=session.get("firstname"), allowed_tabs=["dashboard", "manage_accounts"], selected_tab="dashboard")
-        if role == "Faculty Member":
+        if role == 2:
             return render_template("front_page/professor_dashboard.html")
-        if role == "Student":
+        if role == 3:
             return render_template("front_page/student_dashboard.html")
     return render_template("front_page/index.html",  allowed_tabs=["login"])
 
