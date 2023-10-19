@@ -11,7 +11,7 @@ from .sql import db, execute_db, query_db
 def index():
     # If logged in, return appropriate dashboard
     # Otherwise, return the school homepage
-    if session.get("logged_in", False):
+    if session.get("logged_in"):
         role = session.get("role")
         if role == "Faculty Administrator":
             return render_template("front_page/admin_dashboard.html", firstname=session.get("firstname"), allowed_tabs=["dashboard", "manage_accounts"], selected_tab="dashboard")

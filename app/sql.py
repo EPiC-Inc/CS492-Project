@@ -44,7 +44,8 @@ db = create_engine(database_url)
 # db = pyodbc.connect('DRIVER='+driver+';PORT=1433;SERVER='+server+';PORT=1443;DATABASE='+database+';UID='+username+';PWD='+ password)
 
 def query_db(command: str, **kwargs) -> list:
-    ''' <command> is entered as storedProcedure :argument1, :argument2 '''
+    ''' <command> is entered as storedProcedure :argument1, :argument2 \n
+     <kwargs> will fill in the arguments i.e. argument1='blah' '''
     result = []
     with db.connect() as cursor:
         response = cursor.execute(text(command), kwargs)
@@ -53,7 +54,8 @@ def query_db(command: str, **kwargs) -> list:
     return result
 
 def execute_db(command: str, **kwargs) -> list:
-    ''' <command> is entered as storedProcedure :argument1, :argument2 '''
+    ''' <command> is entered as storedProcedure :argument1, :argument2 \n
+     <kwargs> will fill in the arguments i.e. argument1='blah' '''
     result = []
     with db.begin() as cursor:
         response = cursor.execute(text(command), kwargs)
