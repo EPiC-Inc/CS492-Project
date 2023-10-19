@@ -158,6 +158,8 @@
         // This gets the search results and displays them
         //TODO - call the API and populate the table
         // Add a select button that then select the account they want to edit
+        to_find=document.getElementById('to_find').value;
+        fetch("{{url_for('api.search_for_account')}}?to_find=" + to_find).then((searchResults)=>{console.log(searchResults.json())})
         document.getElementById('show_search_results').style.display='block';
         
     }
