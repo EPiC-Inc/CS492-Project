@@ -3,8 +3,15 @@ from .sql import query_db
 
 api = Blueprint('api', __name__)
 
+def search_for_account(to_find: str) -> list:
+    if to_find:
+        results = query_db("getSearchAccount :to_find", to_find=to_find)
+        results = [tuple(row) for row in results]
+        return results
+    return [] 
+
 @api.route("/find_account", methods=["GET"])
-def search_for_account() -> "dict | tuple[dict, int]":
+def authenticate_and_search() -> dict | tuple[dict, int]:
     args = request.args
 
     if not session.get("logged_in"):
@@ -12,15 +19,5 @@ def search_for_account() -> "dict | tuple[dict, int]":
     if not (session.get("role") == "Faculty Administrator"):
         return {"error": "Unauthorized"}, 401
 
-    results = []    
-    to_find = args.get('to_find')
-    results = query_db("getSearchAccount :to_find", to_find=to_find)
-    #if email := args.get('email'):
-    #    results = query_db("select * from Accounts where Accounts_Email=:email",
-    #             email=email)
-    #elif name := args.get('name'):
-    #    results = query_db("select * from Accounts where Accounts_First_Name=:name OR Accounts_Last_Name=:name",
-    #             name=name)
-    results = [tuple(row) for row in results]
-
+    results = search_for_account(args.get('to_find', ''))
     return {"matches": results}

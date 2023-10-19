@@ -19,9 +19,9 @@
             {% endwith %}
 
             {% if action.lower().startswith('edit') %}
-            <form onsubmit="getSearchResults(); return false;">
+            <form method="post">
                     <label for="search_criteria" class="label">Account Search</label>
-                    <input type="text" id="to_find" class="textbox-input-long" placeholder="Last Name or email">
+                    <input type="text" id="to_find" name="to_find" class="textbox-input-long" placeholder="Last Name or email">
                     <input type="submit" value="Go" class="btn btn-primary">
                 </br>
                 </form>
@@ -54,9 +54,11 @@
                     #account_form {
                         display: none;
                     }
+                    /*{% if not results %}*/
                     #show_search_results {
                         display: none;
                     }
+                    /*{% endif %}*/
                 </style>
             {% endif %}
             <form action="{{ url_for('account_admin_page') }}" method="post" class="form-inline" id="account_form">
@@ -154,15 +156,6 @@
 
 {% block scripts %}
 <script>
-    function getSearchResults() {
-        // This gets the search results and displays them
-        //TODO - call the API and populate the table
-        // Add a select button that then select the account they want to edit
-        to_find=document.getElementById('to_find').value;
-        fetch("{{url_for('api.search_for_account')}}?to_find=" + to_find).then((searchResults)=>{console.log(searchResults.json())})
-        document.getElementById('show_search_results').style.display='block';
-        
-    }
     // This is to populate the account form when editing
     function populateAccountForm() {
         // clear error element

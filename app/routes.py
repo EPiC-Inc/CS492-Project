@@ -1,10 +1,12 @@
 from sre_parse import State
+from unittest.mock import seal
 
 from flask import flash, redirect, render_template, request, session, url_for
 
 from . import app, config
+from .api import search_for_account
 from .auth import check_passwd, generate_passwd
-from .sql import db, execute_db, query_db
+from .sql import execute_db, query_db
 
 
 @app.route('/')
@@ -22,9 +24,9 @@ def index():
     return render_template("front_page/index.html",  allowed_tabs=["login"])
 
 @app.route("/admin/accounts", methods=["GET"])
-def account_admin_page():
-    action = request.args.get('action')
-    if action == "Edit":
+def account_admin_page(results=None):
+    action = request.args.get('action', '')
+    if action.lower() == "edit":
         action = "Edit Existing Account"
     else:
         action = "Create New Account"
@@ -37,44 +39,39 @@ def account_admin_page():
 @app.route("/admin/accounts", methods=["POST"])
 def modify_account():
     form = request.form
-    first_name = form.get("firstName", '').replace("'", "''")
-    last_name = form.get("lastName", '').replace("'", "''")
-    email = form.get("email", '').replace("'", "''")
-    role = form.get("role", '3').replace("'", "''")
-    address_line_1 = form.get("homeAddress", '').replace("'", "''")
-    address_line_2 = form.get("secondHomeAddress", '').replace("'", "''")
-    state = form.get("state", '').replace("'", "''")
-    city = form.get("city", '').replace("'", "''")
-    zip_code = form.get("zipCode", '').replace("'", "''")
-    password, hash = generate_passwd()
+    if request.args.get("action", '').lower() == "new":
+        email = form.get("email", '')
+        # Check if a duplicate account exists
+        if bool(query_db("getAccountDetail :email",
+                        email=email
+                        )):
+            flash("An account with this email already exists", 'error')
+            return redirect(url_for("account_admin_page"))
 
-    # Check if a duplicate account exists
-    if bool(query_db("getAccountDetail :email",
-                     email=email
-                     )):
-        flash("An account with this email already exists", 'error')
+        form = dict(form) # Make it mutable
+        password, hash = generate_passwd()
+        form['password'], form['hash'] = password, hash
+
+        if None: #TODO - validate form input
+            flash("Please make sure the form is filled out correctly", 'error')
+            return redirect(url_for("account_admin_page"))
+
+        execute_db("insertAccountDetail :firstName, :lastName, :hash, :email, :role, :homeAddress, :secondHomeAddress, '', :city, :state, :zipCode",
+                **form
+                )
+        flash("Account created! Credentials:", 'success')
+        flash(f"Email: {email}", 'success')
+        flash(f"Password: {password}", 'success')
         return redirect(url_for("account_admin_page"))
 
-    if None: #TODO - validate form input
-        flash("Please make sure the form is filled out correctly", 'error')
-        return redirect(url_for("account_admin_page"))
+    if request.args.get("action", '').lower() == "edit":
+        print(form)
+        if form.get("to_find") is not None:
+            return render_template("admin/accounts.html", 
+                           allowed_tabs=["dashboard", "manage_accounts"], selected_tab="manage_accounts",
+                           action='Edit Existing Account', results=search_for_account(form.get("to_find", '')))
 
-    execute_db("insertAccountDetail :first_name, :last_name, :hash, :email, :role, :address_line_1, :address_line_2, :address_line_3, :city, :state, :zip_code",
-               first_name = first_name,
-               last_name = last_name,
-               hash = hash,
-               email = email,
-               role = role,
-               address_line_1 = address_line_1,
-               address_line_2 = address_line_2,
-               address_line_3 = '',
-               city = city,
-               state = state,
-               zip_code = zip_code
-               )
-    flash("Account created! Credentials:", 'success')
-    flash(f"Email: {email}", 'success')
-    flash(f"Password: {password}", 'success')
+    flash("Unknown error. Please reload the page and try again", 'error')
     return redirect(url_for("account_admin_page"))
 
 @app.route('/login', methods=["GET"])
