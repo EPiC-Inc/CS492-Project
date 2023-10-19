@@ -5,9 +5,12 @@ api = Blueprint('api', __name__)
 
 @api.route("/find_account", methods=["GET"])
 def search_for_account() -> dict | tuple[dict, int]:
-    if not session.get("logged_in"):
-        return {"error": "Not authorized."}, 400
     args = request.args
+
+    if not session.get("logged_in"):
+        return {"error": "Not logged in"}, 403
+    if not (session.get("role") == "Faculty Administrator"):
+        return {"error": "Unauthorized"}, 401
 
     results = []    
     if email := args.get('email'):
