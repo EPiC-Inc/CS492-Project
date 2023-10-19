@@ -69,7 +69,8 @@ def modify_account():
         if form.get("to_find") is not None:
             return render_template("admin/accounts.html", 
                            allowed_tabs=["dashboard", "manage_accounts"], selected_tab="manage_accounts",
-                           action='Edit Existing Account', results=search_for_account(form.get("to_find", '')))
+                           action='Edit Existing Account', results=search_for_account(form.get("to_find", '')),
+                           roles=query_db("getAccountRoles"))
 
     flash("Unknown error. Please reload the page and try again", 'error')
     return redirect(url_for("account_admin_page"))

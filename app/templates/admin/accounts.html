@@ -61,7 +61,7 @@
                     /*{% endif %}*/
                 </style>
             {% endif %}
-            <form action="{{ url_for('account_admin_page') }}" method="post" class="form-inline" id="account_form">
+            <form action="{{ url_for('account_admin_page') }}{% if results %}?action=edit{% else %}?action=new{% endif %}" method="post" class="form-inline" id="account_form">
                 <div class="grid-container">
                     <div class="label">
                         <label for="role">Account Type</label>
