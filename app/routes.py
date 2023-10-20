@@ -109,7 +109,7 @@ def login():
     return redirect(url_for("login"))
 
 
-@app.route('/courses/course_manage.html')
+@app.route('/courses/course_manage')
 def course_manage():
     return render_template('manage_courses.html', tab='courses', selected_tab='course_manage')
 
