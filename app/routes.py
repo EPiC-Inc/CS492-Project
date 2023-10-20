@@ -107,3 +107,11 @@ def login():
     # Case: invalid credentials
     flash("Invalid email or password.", 'error')
     return redirect(url_for("login"))
+
+
+@app.route('/manage/courses')
+def course_manage():
+    return render_template('manage_courses.html', tab='courses', selected_tab='course_manage')
+
+if __name__ == '__main__':
+    app.run(debug=True)
