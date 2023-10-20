@@ -119,9 +119,13 @@ header img {
 }
 .grid-container {
     display: grid;
-    grid-template-columns: 20% 80%; /* Create a 5-column grid */
-    /*width: fit-content;*/
+    grid-template-columns: 20% 40% 40%; /* Create a 5-column grid */
+    /*width: fit-content; */
     /*gap: 6px; Add some spacing between grid items */
+}
+.grid-right {
+    display: grid;
+    grid-template-columns: 80% 20%; /* Create a 5-column grid */
 }
 .grid-container2 {
     display: grid;

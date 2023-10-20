@@ -37,3 +37,16 @@ def authenticate_and_get_details() -> "dict | tuple[dict, int]":
         results = query_db("getAccountDetail :to_find", to_find=email)
         results = [tuple(row) for row in results][0]
     return {"account": results}
+
+@api.route("/account_details, methods=[GET]")
+def set_new_password() -> str:
+    args = request.args
+    setnewpassword = args.get("setnewpassword")
+
+    if not session.get("logged_in"):
+        return {"error": "Not logged in"}, 403
+    if not (session.get("role") == 1):
+        return {"error": "Unauthorized"}, 401
+
+    if setnewpassword:
+        query_db("updatePassword: AccountsID, AccountsPwd")
