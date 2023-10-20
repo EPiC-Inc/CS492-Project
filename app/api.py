@@ -11,7 +11,7 @@ def search_for_account(to_find: str) -> list:
     return [] 
 
 @api.route("/find_account", methods=["GET"])
-def authenticate_and_search() -> dict | tuple[dict, int]:
+def authenticate_and_search() -> "dict | tuple[dict, int]":
     args = request.args
 
     if not session.get("logged_in"):
