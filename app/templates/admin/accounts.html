@@ -126,7 +126,11 @@
                 <div>
                     <br/>
                 <button type="submit" class="btn btn-primary">{% if action.lower().startswith('edit') %}Save Account{% else %}Create Account{% endif %}</button>
+                <input type="hidden" id="addressid" name="addressid" display="none">
+                <input type="hidden" id="accountsid" name="accountsid" display="none">
+        
             </div>
+        
             </form>
          </div>
         <!-- Show different right-side content based on selection -->
@@ -165,15 +169,17 @@
                 (results) => {
                     results = results.account;
                     console.log(results);
+                    document.getElementById('accountsid').value = results[4]
                     document.getElementById('role').value = results[3]
                     document.getElementById('firstName').value = results[0]
                     document.getElementById('lastName').value = results[1]
                     document.getElementById('email').value = results[2]
-                    document.getElementById('homeaddress').value = results[4]
-                    document.getElementById('secondhomeaddress').value = results[5]
-                    document.getElementById('city').value = results[6]
-                    document.getElementById('state').value = results[7]
-                    document.getElementById('zipcode').value = results[8]
+                    document.getElementById('homeaddress').value = results[6]
+                    document.getElementById('addressid').value = results[5]
+                    document.getElementById('secondhomeaddress').value = results[7]
+                    document.getElementById('city').value = results[8]
+                    document.getElementById('state').value = results[9]
+                    document.getElementById('zipcode').value = results[10]
                 }
             )}
         )

@@ -71,9 +71,11 @@ def modify_account():
                            allowed_tabs=["dashboard", "manage_accounts"], selected_tab="manage_accounts",
                            action='Edit Existing Account', results=search_for_account(form.get("to_find", '')),
                            roles=query_db("getAccountRoles"))
-
-    flash("Unknown error. Please reload the page and try again", 'error')
-    return redirect(url_for("account_admin_page"))
+        execute_db("updateAccountDetail :accountsid, :firstName, :lastName, :email, :role, :addressid, :homeaddress, :secondhomeaddress, :city, :state, :zipcode",
+                **form
+                )
+    flash("Account updated succesfully", 'success')
+    return redirect(url_for("account_admin_page")+"?action=Edit")
 
 @app.route('/login', methods=["GET"])
 def display_login_page():
