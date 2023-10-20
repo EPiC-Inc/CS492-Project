@@ -23,7 +23,7 @@ def authenticate_and_search() -> dict | tuple[dict, int]:
     return {"matches": results}
 
 @api.route("/account_details", methods=["GET"])
-def authenticate_and_get_details() -> dict | tuple[dict, int]:
+def authenticate_and_get_details() -> "dict | tuple[dict, int]":
     args = request.args
     email = args.get("email")
     results = []
