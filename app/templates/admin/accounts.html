@@ -20,9 +20,15 @@
 
             {% if action.lower().startswith('edit') %}
             <form method="post">
-                    <label for="search_criteria" class="label">Account Search</label>
-                    <input type="text" id="to_find" name="to_find" class="textbox-input-long" placeholder="Last Name or email">
-                    <input type="submit" value="Go" class="btn btn-primary">
+                <div class="grid-container">
+                    <div class="label">
+                        <label for="search_criteria" class="label">Account Search</label>
+                    </div>
+                    <div class="textbox">
+                        <input type="text" id="to_find" name="to_find" class="textbox-input-long" placeholder="Last Name or email">
+                        <input type="submit" value="Go" class="btn btn-primary">
+                    </div>
+                </div>
                 </br>
                 </form>
                 <form onsubmit="return false;" id="show_search_results">
@@ -128,9 +134,7 @@
                 <button type="submit" class="btn btn-primary">{% if action.lower().startswith('edit') %}Save Account{% else %}Create Account{% endif %}</button>
                 <input type="hidden" id="addressid" name="addressid" display="none">
                 <input type="hidden" id="accountsid" name="accountsid" display="none">
-        
             </div>
-        
             </form>
          </div>
         <!-- Show different right-side content based on selection -->

@@ -123,6 +123,13 @@ header img {
     /*width: fit-content;*/
     /*gap: 6px; Add some spacing between grid items */
 }
+.grid-container2 {
+    display: grid;
+    grid-template-columns: 20% 20% 60%; /* Create a 5-column grid */
+    /*width: fit-content;*/
+    /*gap: 6px; Add some spacing between grid items */
+}
+
 .label {
     padding: 4px;
     font-weight: bold;
