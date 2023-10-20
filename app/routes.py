@@ -56,7 +56,7 @@ def modify_account():
             flash("Please make sure the form is filled out correctly", 'error')
             return redirect(url_for("account_admin_page"))
 
-        execute_db("insertAccountDetail :firstName, :lastName, :hash, :email, :role, :homeAddress, :secondHomeAddress, '', :city, :state, :zipCode",
+        execute_db("insertAccountDetail :firstName, :lastName, :hash, :email, :role, :homeaddress, :secondhomeaddress, '', :city, :state, :zipcode",
                 **form
                 )
         flash("Account created! Credentials:", 'success')
