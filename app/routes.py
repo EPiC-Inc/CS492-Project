@@ -16,7 +16,7 @@ def index():
     if session.get("logged_in"):
         role = session.get("role")
         if role == 1:
-            return render_template("front_page/admin_dashboard.html", firstname=session.get("firstname"), allowed_tabs=["dashboard", "manage_accounts"], selected_tab="dashboard")
+            return render_template("front_page/admin_dashboard.html", firstname=session.get("firstname"), allowed_tabs=["dashboard", "manage_accounts", "course_manage"], selected_tab="dashboard")
         if role == 2:
             return render_template("front_page/professor_dashboard.html")
         if role == 3:
