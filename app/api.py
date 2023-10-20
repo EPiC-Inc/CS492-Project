@@ -16,7 +16,7 @@ def authenticate_and_search() -> "dict | tuple[dict, int]":
 
     if not session.get("logged_in"):
         return {"error": "Not logged in"}, 403
-    if not (session.get("role") == "Faculty Administrator"):
+    if not (session.get("role") == 1):
         return {"error": "Unauthorized"}, 401
 
     results = search_for_account(args.get('to_find', ''))
@@ -30,7 +30,7 @@ def authenticate_and_get_details() -> "dict | tuple[dict, int]":
 
     if not session.get("logged_in"):
         return {"error": "Not logged in"}, 403
-    if not (session.get("role") == "Faculty Administrator"):
+    if not (session.get("role") == 1):
         return {"error": "Unauthorized"}, 401
 
     if email:
