@@ -39,7 +39,7 @@ def authenticate_and_get_details() -> "dict | tuple[dict, int]":
     return {"account": results}
 
 @api.route("/account_details, methods=[GET]")
-def set_new_password() -> str:
+def set_new_password() -> str | tuple[dict, int]:
     args = request.args
     setnewpassword = args.get("setnewpassword")
 
@@ -50,3 +50,4 @@ def set_new_password() -> str:
 
     if setnewpassword:
         query_db("updatePassword: AccountsID, AccountsPwd")
+    return ''

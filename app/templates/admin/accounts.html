@@ -25,7 +25,7 @@
                         <label for="search_criteria" class="label">Account Search</label>
                     </div>
                     <div class="textbox">
-                        <input type="text" id="to_find" name="to_find" class="textbox-input-long" placeholder="Last Name or email">
+                        <input type="text" id="to_find" name="to_find" class="textbox-input-long" placeholder="Last Name or email" autocomplete="off">
                         <input type="submit" value="Go" class="btn btn-primary">
                     </div>
                 </div>
@@ -91,7 +91,7 @@
                         <label for="firstName">First Name</label>
                     </div>
                     <div class="textbox">
-                        <input type="text" id="firstName" name="firstName" class="form-control textbox-input-long" placeholder="First Name">
+                        <input type="text" id="firstName" name="firstName" class="form-control textbox-input-long" placeholder="First Name" autocomplete="off">
                     </div>
                     <div class="textbox">
                         <input type="password" id="setnewpassword" name="setnewpassword" class="form-control textbox-input-long grid-right" placeholder="new password" value="" autocomplete="off">
@@ -100,7 +100,7 @@
                         <label for="lastName">Last Name</label>
                     </div>
                     <div class="textbox">
-                        <input type="text" id="lastName" name="lastName" class="form-control textbox-input-long"  placeholder="Last Name">
+                        <input type="text" id="lastName" name="lastName" class="form-control textbox-input-long"  placeholder="Last Name" autocomplete="off">
                     </div>
                     <div class="textbox">
                         <input type="password" id="setnewpassword2" name="setnewpassword2" class="form-control textbox-input-long grid-right" placeholder="verify new password" autocomplete="off">
@@ -109,7 +109,7 @@
                         <label for="email">Email Address</label>
                     </div>
                     <div class="textbox">
-                        <input type="email" id="email" name="email" class="form-control textbox-input-long"  placeholder="School Email Address">
+                        <input type="email" id="email" name="email" class="form-control textbox-input-long"  placeholder="School Email Address" autocomplete="off">
                         <br/>
                         <br/>
                     </div>
@@ -120,7 +120,7 @@
                         <label for="homeaddress">Home Address</label>
                     </div>
                     <div class="textbox">
-                        <input type="text" id="homeaddress" name="homeaddress" class="form-control textbox-input-long"  placeholder="Address line 1">
+                        <input type="text" id="homeaddress" name="homeaddress" class="form-control textbox-input-long"  placeholder="Address line 1" autocomplete="off">
                     </div>
                     <div class="textbox">
                     </div>
@@ -128,7 +128,7 @@
                     </div>
 
                     <div class="textbox">
-                        <input type="text" id="secondhomeaddress" name="secondhomeaddress" class="form-control  textbox-input-long"  placeholder="Address line 2">
+                        <input type="text" id="secondhomeaddress" name="secondhomeaddress" class="form-control  textbox-input-long"  placeholder="Address line 2" autocomplete="off">
                     </div>
                     <div class="textbox">
                     </div>
@@ -136,7 +136,7 @@
                         <label for="city">City</label>
                     </div>
                     <div class="textbox">
-                        <input type="text" id="city" name="city" class="form-control textbox-input-long"  placeholder="City">
+                        <input type="text" id="city" name="city" class="form-control textbox-input-long"  placeholder="City" autocomplete="off">
                     </div>
                     <div class="textbox">
                     </div>
@@ -145,9 +145,9 @@
                         <label for="state">State</label>                   
                     </div>
                     <div class="textbox">
-                        <input type="text" id="state" name="state" class="form-control textbox-input-short"  placeholder="State">
+                        <input type="text" id="state" name="state" class="form-control textbox-input-short"  placeholder="State" autocomplete="off">
                         <label for="zipcode" class="label" style="padding-left: 10px;">Zip</label>
-                        <input type="text" id="zipcode" name="zipcode" class="form-control textbox-input-medium"  placeholder="Zip Code">
+                        <input type="text" id="zipcode" name="zipcode" class="form-control textbox-input-medium"  placeholder="Zip Code" autocomplete="off">
                     </div>
                     <div class="textbox">
                     </div>
@@ -156,8 +156,8 @@
                 <div>
                     <br/>
                 <button type="submit" class="btn btn-primary">{% if action.lower().startswith('edit') %}Save Account{% else %}Create Account{% endif %}</button>
-                <input type="hidden" id="addressid" name="addressid" display="none">
-                <input type="hidden" id="accountsid" name="accountsid" display="none">
+                <input type="hidden" id="addressid" name="addressid" display="none" autocomplete="off">
+                <input type="hidden" id="accountsid" name="accountsid" display="none" autocomplete="off">
             </div>
             </form>
          </div>
@@ -172,7 +172,7 @@
             </div>
             <div class="form-group">
                 <label for="classes">Classes:</label>
-                <input type="text" id="classes">
+                <input type="text" id="classes" autocomplete="off">
             </div>
         </div>
         <div id="rightSideNewFaculty" class="right-side" style="display: none;">
