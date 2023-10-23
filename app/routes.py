@@ -1,6 +1,3 @@
-from sre_parse import State
-from unittest.mock import seal
-
 from flask import flash, redirect, render_template, request, session, url_for
 
 from . import app, config
@@ -74,7 +71,7 @@ def modify_account():
         execute_db("updateAccountDetail :accountsid, :firstName, :lastName, :email, :role, :addressid, :homeaddress, :secondhomeaddress, :city, :state, :zipcode",
                 **form
                 )
-    flash("Account updated succesfully", 'success')
+    flash("Account updated successfully", 'success')
     return redirect(url_for("account_admin_page")+"?action=Edit")
 
 @app.route('/login', methods=["GET"])
