@@ -23,17 +23,21 @@
                 {% endif %}
                 {% if tab == "manage_accounts" %}
                     <a onclick="toggleSubmenu('ManageAccounts');"><div{{ ' class=current' if selected_tab == "manage_accounts" else "" }}>Account Management</div></a>
-                    <div id="ManageAccounts" class="submenu-top" style="display: none;">
-                        <div id="AddAccount" class="submenu" style="left: -375px; top: 50px;">
+                    <div id="ManageAccounts" class="submenu-top" style="display: none;position: fixed;">
+                        <div id="AddAccount" class="submenu" style="left: 225px; top: 50px;">
                             <a href="{{ url_for('account_admin_page') }}"><div>Add New</div></a>
                         </div>
-                        <div id="EditAccount" class="submenu" style="left: -220px; top: -8px;">
+                        <div id="EditAccount" class="submenu" style="left: 375px; top: -8px;">
                             <a href="{{ url_for('account_admin_page', action='Edit') }}"><div>Edit</div></a>
                         </div>
                     </div>
                 {% endif %}
+                {% if tab == "manage_courses" %}
+                    <a href="{{ url_for('courses') }}"><div{{ ' class=current' if selected_tab == "manage_courses" else "" }}>Manage Classes</div></a>
+                  <!--<div{{ ' class=current' if selected_tab == "courses" else "" }}>Courses</div>-->
+                {% endif %}
                 {% if tab == "courses" %}
-                    <a href="{{ url_for('course_manage') }}"><div{{ ' class=current' if selected_tab == "course_manage" else "" }}>Manage Classes</div></a>
+                    <a href="{{ url_for('courses') }}"><div{{ ' class=current' if selected_tab == "courses" else "" }}>Classes</div></a>
                   <!--<div{{ ' class=current' if selected_tab == "courses" else "" }}>Courses</div>-->
                 {% endif %}
                 {% if tab == "logout" %}
