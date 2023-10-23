@@ -5,7 +5,7 @@ from sqlalchemy.engine import URL
 from sqlalchemy.sql import text
 from sqlalchemy.exc import ResourceClosedError
 
-from . import app, config
+from . import config
 
 # Set up the database connection
 dialect = config.database_dialect
@@ -30,18 +30,6 @@ database_url = URL.create(
 )
 
 db = create_engine(database_url)
-
-# with db.begin() as cursor:
-#     result = cursor.execute(text("getLogin :email"), {"email": "admin@sms.com"})
-#     for row in result:
-#         print("a:", row)
-
-# with db.connect() as cursor:
-#     result = cursor.execute(text("getLogin :email"), {"email": "admin@sms.com"})
-#     for row in result:
-#         print("a:", row)
-
-# db = pyodbc.connect('DRIVER='+driver+';PORT=1433;SERVER='+server+';PORT=1443;DATABASE='+database+';UID='+username+';PWD='+ password)
 
 def query_db(command: str, **kwargs) -> list:
     ''' <command> is entered as storedProcedure :argument1, :argument2 \n

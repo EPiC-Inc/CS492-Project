@@ -19,7 +19,7 @@
             {% endwith %}
 
             {% if action.lower().startswith('edit') %}
-            <form method="post">
+            <form method="post" autocomplete="off">
                 <div class="grid-container">
                     <div class="label">
                         <label for="search_criteria" class="label">Account Search</label>
@@ -31,7 +31,7 @@
                 </div>
                 </br>
                 </form>
-                <form onsubmit="return false;" id="show_search_results">
+                <form onsubmit="return false;" id="show_search_results" autocomplete="off">
                     <div id="search_results">
                         <label for="search_results" class="label">Results</label>
                         <table border="1">
@@ -67,7 +67,7 @@
                     /*{% endif %}*/
                 </style>
             {% endif %}
-            <form action="{{ url_for('account_admin_page') }}{% if results %}?action=edit{% else %}?action=new{% endif %}" method="post" class="form-inline" id="account_form">
+            <form action="{{ url_for('account_admin_page') }}{% if results %}?action=edit{% else %}?action=new{% endif %}" method="post" class="form-inline" id="account_form" autocomplete="off">
                 <div class="grid-container">
                     <div class="label">
                         <label for="role">Account Type</label>
@@ -94,7 +94,7 @@
                         <input type="text" id="firstName" name="firstName" class="form-control textbox-input-long" placeholder="First Name" autocomplete="off">
                     </div>
                     <div class="textbox">
-                        <input type="password" id="setnewpassword" name="setnewpassword" class="form-control textbox-input-long grid-right" placeholder="new password" value="" autocomplete="off">
+                        <input type="password" id="setnewpassword" name="setnewpassword" class="form-control textbox-input-long grid-right" placeholder="new password" value="" autocomplete="new-password">
                     </div>
                     <div class="label">
                         <label for="lastName">Last Name</label>
@@ -103,7 +103,7 @@
                         <input type="text" id="lastName" name="lastName" class="form-control textbox-input-long"  placeholder="Last Name" autocomplete="off">
                     </div>
                     <div class="textbox">
-                        <input type="password" id="setnewpassword2" name="setnewpassword2" class="form-control textbox-input-long grid-right" placeholder="verify new password" autocomplete="off">
+                        <input type="password" id="setnewpassword2" name="setnewpassword2" class="form-control textbox-input-long grid-right" placeholder="verify new password" autocomplete="new-password">
                     </div>
                     <div class="label">
                         <label for="email">Email Address</label>

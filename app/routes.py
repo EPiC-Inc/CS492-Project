@@ -22,6 +22,8 @@ def index():
 
 @app.route("/admin/accounts", methods=["GET"])
 def account_admin_page(results=None):
+    if not (session.get('role') == 1):
+        return "Not Authorized", 401
     action = request.args.get('action', '')
     if action.lower() == "edit":
         action = "Edit Existing Account"
