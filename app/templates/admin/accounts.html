@@ -83,7 +83,7 @@
                     </div>
                     <div class="textbox">
                         <div class="label">
-                            <label for="setnewpasswordd">Set Password</label>
+                            <label for="setnewpassword">Set Password</label>
                         </div>
                     </div>
 
@@ -191,7 +191,6 @@
     // This is to populate the account form when editing
     function populateAccountForm(email) {
         // clear error element
-        //TODO - request feedback from the server
         fetch("{{ url_for('api.authenticate_and_get_details') }}?email=" + email).then(
             (results) => {results.json().then(
                 (results) => {

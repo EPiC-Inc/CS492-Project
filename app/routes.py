@@ -13,12 +13,12 @@ def index():
     if session.get("logged_in"):
         role = session.get("role")
         if role == 1:
-            return render_template("front_page/admin_dashboard.html", firstname=session.get("firstname"), allowed_tabs=["dashboard", "manage_accounts",], selected_tab="dashboard")
+            return render_template("front_page/admin_dashboard.html", firstname=session.get("firstname"), allowed_tabs=["dashboard", "manage_accounts", "manage_courses"], selected_tab="dashboard")
         if role == 2:
-            return render_template("front_page/professor_dashboard.html")
+            return render_template("front_page/professor_dashboard.html", allowed_tabs=["dashboard", "manage_courses"], selected_tab="dashboard")
         if role == 3:
-            return render_template("front_page/student_dashboard.html")
-    return render_template("front_page/index.html",  allowed_tabs=["login"])
+            return render_template("front_page/student_dashboard.html", allowed_tabs=["dashboard", "courses"], selected_tab="dashboard")
+    return render_template("front_page/index.html", allowed_tabs=["login"])
 
 @app.route("/admin/accounts", methods=["GET"])
 def account_admin_page(results=None):
@@ -32,7 +32,7 @@ def account_admin_page(results=None):
 
     roles = query_db("getAccountRoles")
     return render_template("admin/accounts.html", 
-                           allowed_tabs=["dashboard", "manage_accounts"], selected_tab="manage_accounts",
+                           allowed_tabs=["dashboard", "manage_accounts", "manage_courses"], selected_tab="manage_accounts",
                            roles=roles, action=action)
 
 @app.route("/admin/accounts", methods=["POST"])
@@ -67,7 +67,7 @@ def modify_account():
         print(form)
         if form.get("to_find") is not None:
             return render_template("admin/accounts.html", 
-                           allowed_tabs=["dashboard", "manage_accounts"], selected_tab="manage_accounts",
+                           allowed_tabs=["dashboard", "manage_accounts", "courses"], selected_tab="manage_accounts",
                            action='Edit Existing Account', results=search_for_account(form.get("to_find", '')),
                            roles=query_db("getAccountRoles"))
         execute_db("updateAccountDetail :accountsid, :firstName, :lastName, :email, :role, :addressid, :homeaddress, :secondhomeaddress, :city, :state, :zipcode",
@@ -108,9 +108,13 @@ def login():
     return redirect(url_for("login"))
 
 
-@app.route('/courses/course_manage')
-def course_manage():
-    return render_template('manage_courses.html', tab='courses', selected_tab='course_manage')
+@app.route('/courses')
+def courses():
+    if session.get("role", 3) <= 2:
+        return render_template('courses/course_manage.html', allowed_tabs=["dashboard", "manage_accounts", "manage_courses"], selected_tab='manage_courses')
+    elif session.get("role", 3) >= 3:
+        return render_template('courses/course_view.html', allowed_tabs=["dashboard", "courses"], selected_tab='courses')
+    return redirect(url_for("login"))
 
-if __name__ == '__main__':
-    app.run(debug=True)
+# if __name__ == '__main__':
+#     app.run(debug=True)
