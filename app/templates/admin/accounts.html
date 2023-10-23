@@ -196,17 +196,17 @@
                 (results) => {
                     results = results.account;
                     console.log(results);
-                    document.getElementById('accountsid').value = results[4]
-                    document.getElementById('role').value = results[3]
-                    document.getElementById('firstName').value = results[0]
-                    document.getElementById('lastName').value = results[1]
-                    document.getElementById('email').value = results[2]
-                    document.getElementById('homeaddress').value = results[6]
-                    document.getElementById('addressid').value = results[5]
-                    document.getElementById('secondhomeaddress').value = results[7]
-                    document.getElementById('city').value = results[8]
-                    document.getElementById('state').value = results[9]
-                    document.getElementById('zipcode').value = results[10]
+                    document.getElementById('accountsid').value = results[4];
+                    document.getElementById('role').value = results[3];
+                    document.getElementById('firstName').value = results[0];
+                    document.getElementById('lastName').value = results[1];
+                    document.getElementById('email').value = results[2];
+                    document.getElementById('homeaddress').value = results[6];
+                    document.getElementById('addressid').value = results[5];
+                    document.getElementById('secondhomeaddress').value = results[7];
+                    document.getElementById('city').value = results[8];
+                    document.getElementById('state').value = results[9];
+                    document.getElementById('zipcode').value = results[10];
                 }
             )}
         )
@@ -216,8 +216,24 @@
         // else pull up an error
     }
     function setAccountPassword() {
-        var newPassword = document.getElementById('setnewpassword').value
-        alert(newPassword)
+        var new_password_element = document.getElementById('setnewpassword');
+        var new_password_verify = document.getElementById('setnewpassword2');
+        if (new_password_element.value == new_password_verify.value){
+            var newPassword = document.getElementById('setnewpassword').value;
+            fetch("{{ url_for('api.authenticate_and_set_new_password') }}", {
+                method: "POST",
+                body: JSON.stringify({
+                    'new_password': newPassword,
+                    'id': document.getElementById('accountsid').value
+                }),
+                headers: {
+                    "Content-type": "application/json;"
+                }
+            })
+        } else {
+            alert("New passwords must match");
+            //TODO - make this error not an alert box but an inline error
+        }
     }
 </script>
 
