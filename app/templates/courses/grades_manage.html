@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}Manage Grades & Attendance{% endblock %}
+
+{% block body %}
+<div>
+    <h1>
+        Select Student
+    </h1>
+    <div>
+        [Student List]
+    </div>
+    <div>
+        <form onsubmit="return false;">
+            <label for="assignment">Assignment:</label>
+            <option id="assignment"></option>
+            <label for="score">Score:</label>
+            <input id="score">
+            <label for="grade">Student's Overall Grade:</label>
+            <input id="grade">
+            <span></span>
+            <span></span>
+            <label for="date">Select Date</label>
+            <input id="date">
+            <span></span>
+            <div>
+                <label for="present">Present:</label>
+                <input id="present" name="present" type="radio">
+                <label for="absent">Absent</label>
+                <input id="absent" name="present" type="radio">
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
