@@ -44,6 +44,9 @@
                     <div>Log Out</div>
                 {% endif %}
             {% endfor %}
+            {% if session.get("role") %}
+                <a href="{{ url_for('logout') }}"><div>Logout</div></a>
+            {% endif %}
         </header>
         <div id="content">
             {% block body %}

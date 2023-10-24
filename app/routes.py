@@ -20,6 +20,11 @@ def index():
             return render_template("front_page/student_dashboard.html", allowed_tabs=["dashboard", "courses"], selected_tab="dashboard")
     return render_template("front_page/index.html", allowed_tabs=["login"])
 
+@app.route("/logout")
+def logout():
+    session.clear()
+    return redirect(url_for('index'))
+
 @app.route("/admin/accounts", methods=["GET"])
 def account_admin_page(results=None):
     if not (session.get('role') == 1):
