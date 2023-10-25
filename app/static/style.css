@@ -184,12 +184,16 @@ header img {
 #courses_manage_container {
     display: grid;
     grid-template-columns: 5fr 4fr;
+    justify-items: center;
+    margin: auto;
+    width: 90%;
 }
 #courses_manage_container form {
     display: grid;
     gap: 5%;
     grid-template-columns: 1fr 2fr;
     margin: auto;
+    margin-bottom: 5%;
     width: 80%;
 }
 
