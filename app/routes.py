@@ -123,7 +123,7 @@ def courses():
 @app.route('/grades')
 def grades():
     if session.get("role", 0) <= 2:
-        return render_template('courses/grades_manage.html', selected_tab='manage_grades')
+        return render_template('courses/grades_manage.html', selected_tab='manage_courses')
     elif session.get("role", -1) >= 3:
         return render_template('courses/grades_view.html', selected_tab='grades')
     return redirect(url_for("login"))

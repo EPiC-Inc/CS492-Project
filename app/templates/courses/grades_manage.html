@@ -4,9 +4,10 @@
 
 {% block body %}
 <div id="grades_manage_container">
-    <h1>
+    <h2>
         Select Student
-    </h1>
+    </h2>
+    <span></span>
     <div>
         [Student List]
     </div>
@@ -21,11 +22,12 @@
             <span></span>
             <span></span>
             <label for="date">Select Date</label>
-            <input id="date">
+            <input id="date" type="date">
             <span></span>
             <div>
                 <label for="present">Present:</label>
                 <input id="present" name="present" type="radio">
+                <br>
                 <label for="absent">Absent</label>
                 <input id="absent" name="present" type="radio">
             </div>
