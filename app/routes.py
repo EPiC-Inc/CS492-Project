@@ -112,13 +112,20 @@ def login():
     flash("Invalid email or password.", 'error')
     return redirect(url_for("login"))
 
-
 @app.route('/courses')
 def courses():
-    if session.get("role", 3) <= 2:
+    if session.get("role", 99) <= 2:
         return render_template('courses/course_manage.html', selected_tab='manage_courses')
-    elif session.get("role", 3) >= 3:
+    elif session.get("role", -1) >= 3:
         return render_template('courses/course_view.html', selected_tab='courses')
+    return redirect(url_for("login"))
+
+@app.route('/grades')
+def grades():
+    if session.get("role", 0) <= 2:
+        return render_template('courses/grades_manage.html', selected_tab='manage_grades')
+    elif session.get("role", -1) >= 3:
+        return render_template('courses/grades_view.html', selected_tab='grades')
     return redirect(url_for("login"))
 
 # if __name__ == '__main__':

@@ -180,3 +180,8 @@ header img {
     font-size: large;
     height: 25px;
 }
+
+#grades_manage_container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
