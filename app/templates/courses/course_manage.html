@@ -2,25 +2,16 @@
 {% block title %}Manage Courses{% endblock %}
 {% block body %}
     <div id="courses_manage_container">
-        <span></span>
-        <div>
-            <h2>Degree Path:</h2>
-        </div>
-        <form onsubmit="return false;">
-            <h2>Class ID: (+)</h2>
-            <!-- <input type="text" id="class-id" name="class-id"> -->
-            <option>
-                <!-- TODO get a list of all classes assigned to the currently logged-in professor -->
-            </option>
-            <h2>Student Name:</h2>
-            <input type="text" id="student-name" name="student-name">
-            <h2>Number of Students:</h2>
-            <input type="number" id="student-number" name="student-number" min="1" max="20">
-            <h2>Description:</h2>
-            <textarea id="description" name="description" rows="4" cols="50"></textarea>
-        </form>
-        <select name="available-classes" id="available-classes" multiple>
-            <!-- Add options for available classes -->
-        </select>
+        {% include 'courses/_compose_course_details.html' %}
     </div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    function compose() {
+        fetch("{{ url_for('api.compose_course_manage_form') }}")
+    }
+
+    function newCourse() {}
+</script>
 {% endblock %}

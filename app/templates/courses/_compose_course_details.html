@@ -1,0 +1,32 @@
+<form onsubmit="return false;">
+    <span></span>
+    <h2>Degree Path:</h2>
+    <div class="on-left">
+        <span><button id="new_course" onclick="newCourse();">(+)</button> <label for="class-id">Class ID:</label></span>
+    <select name="class-id" id="class-id" onchange="compose();">
+        <!-- TODO get a list of all classes assigned to the currently logged-in professor -->
+    </select>
+        <label id="new-class-id-spacer" style="display: none;">
+        <input id="new-class-id" style="display: none;">
+    <label for="class-name">Class Name:</label>
+    <input type="text" id="class-name" name="student-name">
+    <label for="num-students">Number of Students:</label>
+    <input type="number" id="num-students" name="num-students" min="1" max="20">
+    <label for="description">Description:</label>
+    <textarea id="description" name="description" rows="4" cols="50"></textarea>
+    </div>
+    <div>
+        <select name="degree-path" id="degree-path" multiple style="height: 100%;">
+            <optgroup label="Engineering">
+                <option>Engineering</option>
+                <option>Biochemical</option>
+                <option>Electrical</option>
+            </optgroup>
+            <optgroup label="Computer Science">
+                <option>Security</option>
+                <option>Software Engineering</option>
+                <option>IC Design</option>
+            </optgroup>
+        </select>
+    </div>
+</form>
