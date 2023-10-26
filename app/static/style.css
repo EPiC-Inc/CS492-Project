@@ -181,7 +181,38 @@ header img {
     height: 25px;
 }
 
-#grades_manage_container {
+#courses_manage_container form {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 5fr 2fr;
+    justify-items: center;
+    margin: auto;
+    width: 70%;
+}
+#courses_manage_container .on-left {
+    display: grid;
+    gap: 5%;
+    grid-template-columns: 1fr 2fr;
+    margin: auto;
+    margin-bottom: 5%;
+    width: 80%;
+}
+button#new_course {
+    vertical-align: top;
+    height: 100%;
+}
+
+#grades_manage_container {
+    /* align-items: end; */
+    display: grid;
+    grid-template-columns: 2fr 3fr;
+    justify-items: center;
+    margin: auto;
+    width: 70%;
+}
+#grades_manage_container form {
+    display: grid;
+    gap: 5%;
+    grid-template-columns: 1fr 2fr;
+    margin: auto;
+    width: 80%;
 }

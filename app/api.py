@@ -1,15 +1,22 @@
-from flask import Blueprint, request, session
+from flask import Blueprint, request, session, render_template
 from .sql import query_db, execute_db
 from .auth import generate_hash
 
 api = Blueprint('api', __name__)
+
 
 def search_for_account(to_find: str) -> list:
     if to_find:
         results = query_db("getSearchAccount :to_find", to_find=to_find)
         results = [tuple(row) for row in results]
         return results
-    return [] 
+    return []
+
+
+@api.route('/compose/course_manage_form')
+def compose_course_manage_form():
+    return render_template('courses/_compose_course_details.html')
+
 
 @api.route("/find_account", methods=["GET"])
 def authenticate_and_search() -> dict | tuple[dict, int]:

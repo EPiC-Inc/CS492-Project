@@ -22,40 +22,40 @@
             {% endif %}
             {% if session.get('role', 99) <= 2 %}
                 <a onclick="toggleSubmenu('ManageAccounts');"><div{{ ' class=current' if selected_tab == "manage_accounts" else "" }}>Account Management</div></a>
-                <div id="ManageAccounts" class="submenu-top" style="display: none;position: fixed;">
-                    <div id="AddAccount" class="submenu" style="left: 225px; top: 50px;">
+                <div id="ManageAccounts" class="submenu-top" style="display: none; position: absolute;">
+                    <div id="AddAccount" class="submenu" style="left: 215%; top: 50px;">
                         <a href="{{ url_for('account_admin_page') }}"><div>Add New</div></a>
                     </div>
-                    <div id="EditAccount" class="submenu" style="left: 375px; top: -8px;">
+                    <div id="EditAccount" class="submenu" style="left: 325%; top: -8px;">
                         <a href="{{ url_for('account_admin_page', action='Edit') }}"><div>Edit</div></a>
                     </div>
                 </div>
             {% endif %}
             {% if session.get('role', 99) <= 2 %}
-                <!-- <a href="{{ url_for('courses') }}"><div{{ ' class=current' if selected_tab == "manage_courses" else "" }}>Manage Classes</div></a> -->
+                <!-- <a href="{{ url_for('courses') }}"><div{{ ' class=current' if selected_tab == "manage_courses" else "" }}></div></a> -->
                 <!--<div{{ ' class=current' if selected_tab == "courses" else "" }}>Courses</div>-->
-                <a onclick="toggleSubmenu('ManageClasses');"><div{{ ' class=current' if selected_tab == "manage_accounts" else "" }}>Classes</div></a>
-                <div id="ManageClasses" class="submenu-top" style="display: none;position: fixed;">
-                    <div id="EditClasses" class="submenu" style="left: 225px; top: 50px;">
-                        <a href="{{ url_for('account_admin_page') }}"><div>Manage Classes</div></a>
+                <a onclick="toggleSubmenu('ManageClasses');"><div{{ ' class=current' if selected_tab == "manage_courses" else "" }}>Manage Classes</div></a>
+                <div id="ManageClasses" class="submenu-top" style="display: none; position: absolute;">
+                    <div id="EditClasses" class="submenu" style="left: 247%; top: 50px;">
+                        <a href="{{ url_for('courses') }}"><div>Manage Classes</div></a>
                     </div>
-                    <div id="EditGrades" class="submenu" style="left: 375px; top: -8px;">
-                        <a href="{{ url_for('account_admin_page', action='Edit') }}"><div>Manage Grades</div></a>
+                    <div id="EditGrades" class="submenu" style="left: 353%; top: -8px;">
+                        <a href="{{ url_for('grades') }}"><div>Manage Grades</div></a>
                     </div>
                 </div>
             {% endif %}
             {% if session.get('role', -1) >= 3 %}
                 <!-- <a href="{{ url_for('courses') }}"><div{{ ' class=current' if selected_tab == "courses" else "" }}>Classes</div></a> -->
                 <!--<div{{ ' class=current' if selected_tab == "courses" else "" }}>Courses</div>-->
-                <a onclick="toggleSubmenu('ViewClasses');"><div{{ ' class=current' if selected_tab == "manage_accounts" else "" }}>Classes</div></a>
-                <div id="ViewClasses" class="submenu-top" style="display: none;position: fixed;">
+                <!-- <a onclick="toggleSubmenu('ViewClasses');"><div{{ ' class=current' if selected_tab == "manage_accounts" else "" }}>Classes</div></a>
+                <div id="ViewClasses" class="submenu-top" style="display: none; position: absolute;">
                     <div id="Classes" class="submenu" style="left: 225px; top: 50px;">
                         <a href="{{ url_for('account_admin_page') }}"><div>Current Classes</div></a>
                     </div>
                     <div id="Grades" class="submenu" style="left: 375px; top: -8px;">
                         <a href="{{ url_for('account_admin_page', action='Edit') }}"><div>Grades</div></a>
                     </div>
-                </div>
+                </div> -->
             {% endif %}
             {% if session.get("role") %}
                 <a href="{{ url_for('logout') }}"><div>Logout</div></a>
@@ -83,6 +83,8 @@
         function toggleSubmenu(menuname) {
             var submenu = document.getElementById(menuname);
             if (submenu.style.display === "none") {
+                document.getElementById("ManageAccounts").style.display = "none";
+                document.getElementById("ManageClasses").style.display = "none";
                 submenu.style.display = "block";
             } else {
                 submenu.style.display = "none";
