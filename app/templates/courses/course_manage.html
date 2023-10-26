@@ -12,6 +12,16 @@
         fetch("{{ url_for('api.compose_course_manage_form') }}")
     }
 
-    function newCourse() {}
+    function newCourse() {
+        if (document.getElementById('new-class-id').style.display === 'none'){
+            document.getElementById('new-class-id-spacer').style.display = 'block';
+            document.getElementById('new-class-id').style.display = 'block';
+            document.getElementById('class-id').disabled = true;
+        } else {
+            document.getElementById('new-class-id-spacer').style.display = 'none';
+            document.getElementById('new-class-id').style.display = 'none';
+            document.getElementById('class-id').disabled = false;
+        }
+    }
 </script>
 {% endblock %}
