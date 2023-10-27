@@ -56,20 +56,21 @@ def authenticate_and_set_new_password() -> "list | tuple[dict, int]":
     form = request.get_json()
     if id := form.get("id"):
         pass
-    elif email := form.get("email"):
-        email = query_db("getAccountDetail :email", email=email)
-        if email:
-            id = email[0][4]
-        else:
-            return {"error": "Email not found"}, 400
+        #return {"error": "ID found"}
+    #elif email := form.get("email"):
+    #    email = query_db("getAccountDetail :email", email=email)
+    #    if email:
+    #        id = email[0][4]
+    #    else:
+    #        return {"error": "Email not found"}, 400
     else:
-        return {"error": "Email or ID not provided"}, 400
+        return {"error": "ID not provided"}, 400
     new_password = form.get("new_password")
     if not new_password:
         return {"error":
                 "Unable to set password - no new password passed"}, 422
 
     hash = generate_hash(new_password).decode()
-    response = execute_db("updatePassword: :id, :new_password",
+    response = execute_db("updatePassword :id, :new_password",
         id=id, new_password=hash)
     return response

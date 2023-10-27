@@ -216,3 +216,11 @@ button#new_course {
     margin: auto;
     width: 80%;
 }
+.error_message {
+    color: darkred;
+    font-size: 20px;
+}
+.success_message {
+    color: green;
+    font-size: 20px;
+}

@@ -123,6 +123,7 @@
                         <input type="text" id="homeaddress" name="homeaddress" class="form-control textbox-input-long"  placeholder="Address line 1" autocomplete="off">
                     </div>
                     <div class="textbox">
+                        <label for="passwordmessage" id="passwordmessage"></label>
                     </div>
                     <div class="label">
                     </div>
@@ -218,6 +219,10 @@
     function setAccountPassword() {
         var new_password_element = document.getElementById('setnewpassword');
         var new_password_verify = document.getElementById('setnewpassword2');
+        var errormessage = document.getElementById('passwordmessage');
+        //resest password message
+        errormessage.innerHTML = '';
+
         if (new_password_element.value == new_password_verify.value){
             var newPassword = document.getElementById('setnewpassword').value;
             fetch("{{ url_for('api.authenticate_and_set_new_password') }}", {
@@ -230,8 +235,13 @@
                     "Content-type": "application/json;"
                 }
             })
+            errormessage.className = 'success_message';
+            errormessage.innerHTML = 'Password updated';
+
         } else {
-            alert("New passwords must match");
+            errormessage.className = 'error_message';
+            errormessage.innerHTML = 'Passwords must match';
+            //alert("New passwords must match");
             //TODO - make this error not an alert box but an inline error
         }
     }
