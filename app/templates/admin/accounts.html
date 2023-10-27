@@ -82,9 +82,11 @@
                         <br/>
                     </div>
                     <div class="textbox">
-                        <div class="label">
-                            <label for="setnewpassword">Set Password</label>
-                        </div>
+                        {% if action.lower().startswith('edit') %}
+                            <div class="label">
+                                <label for="setnewpassword">Set Password</label>
+                            </div>
+                        {% endif %}
                     </div>
 
                     <div class="label">
@@ -94,7 +96,9 @@
                         <input type="text" id="firstName" name="firstName" class="form-control textbox-input-long" placeholder="First Name" autocomplete="off">
                     </div>
                     <div class="textbox">
-                        <input type="password" id="setnewpassword" name="setnewpassword" class="form-control textbox-input-long grid-right" placeholder="new password" value="" autocomplete="new-password">
+                        {% if action.lower().startswith('edit') %}
+                            <input type="password" id="setnewpassword" name="setnewpassword" class="form-control textbox-input-long grid-right" placeholder="new password" value="" autocomplete="new-password">
+                        {% endif %}
                     </div>
                     <div class="label">
                         <label for="lastName">Last Name</label>
@@ -103,7 +107,9 @@
                         <input type="text" id="lastName" name="lastName" class="form-control textbox-input-long"  placeholder="Last Name" autocomplete="off">
                     </div>
                     <div class="textbox">
-                        <input type="password" id="setnewpassword2" name="setnewpassword2" class="form-control textbox-input-long grid-right" placeholder="verify new password" autocomplete="new-password">
+                        {% if action.lower().startswith('edit') %}
+                            <input type="password" id="setnewpassword2" name="setnewpassword2" class="form-control textbox-input-long grid-right" placeholder="verify new password" autocomplete="new-password">
+                        {% endif %}
                     </div>
                     <div class="label">
                         <label for="email">Email Address</label>
@@ -114,7 +120,9 @@
                         <br/>
                     </div>
                     <div class="textbox">
-                        <button type="button" class="btn btn-primary" onclick="setAccountPassword();">Set Password</button>
+                        {% if action.lower().startswith('edit') %}
+                            <button type="button" class="btn btn-primary" onclick="setAccountPassword();">Set Password</button>
+                        {% endif %}
                     </div>  
                     <div class="label">
                         <label for="homeaddress">Home Address</label>
