@@ -19,7 +19,7 @@ def compose_course_manage_form():
 
 
 @api.route("/find_account", methods=["GET"])
-def authenticate_and_search() -> dict | tuple[dict, int]:
+def authenticate_and_search() -> "dict | tuple[dict, int]":
     args = request.args
 
     if not session.get("logged_in"):
@@ -31,7 +31,7 @@ def authenticate_and_search() -> dict | tuple[dict, int]:
     return {"matches": results}
 
 @api.route("/account_details", methods=["GET"])
-def authenticate_and_get_details() -> dict | tuple[dict, int]:
+def authenticate_and_get_details() -> "dict | tuple[dict, int]":
     args = request.args
     email = args.get("email")
     results = []
@@ -47,7 +47,7 @@ def authenticate_and_get_details() -> dict | tuple[dict, int]:
     return {"account": results}
 
 @api.route("/password_reset", methods=["POST"])
-def authenticate_and_set_new_password() -> list | tuple[dict, int]:
+def authenticate_and_set_new_password() -> "list | tuple[dict, int]":
     if not session.get("logged_in"):
         return {"error": "Not logged in"}, 403
     if not (session.get("role") == 1):
