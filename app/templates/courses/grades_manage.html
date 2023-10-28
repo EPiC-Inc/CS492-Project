@@ -3,26 +3,28 @@
 {% block title %}Manage Grades & Attendance{% endblock %}
 
 {% block body %}
-<div id="grades_manage_container">
-    <h2>
-        Select Student
-    </h2>
-    <span></span>
-        <div>
-        <select name="student-list" id="student-list" multiple style="height: 100%;">
-            <optgroup label="Students:">
-            </optgroup>
+<div class="on-left">
+    <div id="grades_manage_container">
+        <h2>
+            Select Student
+        </h2>
+        <span></span>
+            <div>
+            <select name="student-list" id="student-list" multiple style="height: 100%;">
+                <optgroup label="Students:">
+                </optgroup>
+                </select>
+            <h2>
+            Select Course
+            </h2>
+            <div>
+            <select name="course-select" id="course-select" multiple style="height: 100%;">
+                <optgroup label="Course:">
+                </optgroup>
             </select>
-       <h2>
-        Select Course
-    </h2>
-        <div>
-        <select name="course-select" id="course-select" multiple style="height: 100%;">
-            <optgroup label="Course:">
-            </optgroup>
-        </select>
+        </div>
     </div>
-    <div>
+    <div class="on-right">
         <form onsubmit="return false;">
             <label for="assignment">Assignment:</label>
             <option id="assignment"></option>
