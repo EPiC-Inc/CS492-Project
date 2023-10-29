@@ -147,23 +147,38 @@ header img {
     padding: 4px;
     font-weight: bold;
 }
+.dropdown {
+    width: 405px;
+    font-size: large;
+    height: 30px;
+}
 .textbox {
     padding: 4px;
 }    
 .textbox-input-long {
-    width: 250px;
+    width: 400px;
     font-size: large;
     height: 20px;
+}
+.textbox-input-long-multi {
+    width: 400px;
+    font-size: large;
+    height: 100px;
 }
 .textbox-input-medium {
     font-size: large;
     height: 20px;
-    width: 115px;
+    width: 220px;
 }
 .textbox-input-short {
     font-size: large;
     height: 20px;
-    width: 70px;
+    width: 100px;
+}
+.textbox-input-state {
+    font-size: large;
+    height: 20px;
+    width: 55px;
 }
 .btn-primary {
     padding: 10px;
@@ -174,13 +189,6 @@ header img {
     cursor:pointer;
     border: none;
 }
-.dropdown {
-    padding: auto;
-    width: 258px;
-    font-size: large;
-    height: 25px;
-}
-
 #courses_manage_container form {
     display: grid;
     grid-template-columns: 5fr 2fr;
@@ -194,7 +202,7 @@ header img {
     grid-template-columns: 1fr 2fr;
     margin: auto;
     margin-bottom: 5%;
-    width: 80%;
+    width: 100%;
 }
 button#new_course {
     vertical-align: top;

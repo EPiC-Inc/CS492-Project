@@ -1,36 +1,40 @@
 <form autocomplete="off" id="COURSE_FORM" method="post" action="{{ url_for('api.authenticate_and_manage_course') }}">
     <div id="errors" style="padding-top: 3%;"></div>
-    <h2>Degree Path:</h2>
+    <h2>Degree Path</h2>
     <div class="on-left">
-        <span><label for="class-code">Class Code:</label></span>
-        <select name="class-id" id="class-code" onchange="compose();" required>
-            <option disabled {{ "selected" if not chosen_class else "" }} value=""> -- Select Class -- </option>
-            <option value="__new__"> -- Add New Class -- </option>
-            {% for class_id, class_code in course_list %}
-            <option value="{{ class_id }}" {{ "selected" if class_id == chosen_class else "" }}>{{ class_code }}</option>
-            {% endfor %}
-        </select>
-            <label id="new-class-code-spacer" style="display: none;">New Class Code:</label>
-            <input required disabled id="new-class-code" style="display: none;" name="new-class-code">
-        <label for="class-name">Class Name:</label>
-        <input required type="text" id="class-name" name="class-name" value="{{ class_name if class_name else '' }}">
+        <div class = "label">
+            <span><label for="class-code">Class Code</label></span>
+        </div>
+            <select name="class-id" id="class-code" class="dropdown" onchange="compose();" required>
+                <option disabled {{ "selected" if not chosen_class else "" }} value=""> -- Select Class -- </option>
+                <option value="__new__"> -- Add New Class -- </option>
+                {% for class_id, class_code in course_list %}
+                <option value="{{ class_id }}" {{ "selected" if class_id == chosen_class else "" }}>{{ class_code }}</option>
+                {% endfor %}
+            </select>
+            <label id="new-class-code-spacer" class="label" style="display: none;">New Class Code</label>
+            <input required disabled id="new-class-code" class="textbox-input-long" style="display: none;" name="new-class-code">
+        <label for="class-name" class="label">Class Name</label>
+        <input required type="text" id="class-name" name="class-name" class="textbox-input-long" value="{{ class_name if class_name else '' }}">
         <!-- <label for="num-students">Number of Students:</label>
         <input type="number" id="num-students" name="num-students" min="1" max="20" value="{{ num_students if num_students else '' }}"> -->
-        <label for="start-date">Start Date:</label>
-        <input name="start-date" id="start-date" type="date" value="{{ start_date if start_date else '' }}" required>
-        <label for="end-date">End Date:</label>
-        <input name="end-date" id="end-date" type="date" value="{{ end_date if end_date else '' }}" required>
-        <label for="description">Description:</label>
-        <textarea id="description" name="description" rows="4" cols="50" style="resize: none;">{{ description if description else '' }}</textarea>
-        <label for="professor">Professor:</label></span>
-        <select name="professor" id="professor" required>
+        <label for="start-date" class="label">Start Date</label>
+        <input name="start-date" id="start-date" type="date" class="textbox-input-long" value="{{ start_date if start_date else '' }}" required>
+        <label for="end-date" class="label">End Date</label>
+        <input name="end-date" id="end-date" type="date" class="textbox-input-long" value="{{ end_date if end_date else '' }}" required>
+        <label for="description" class="label">Description</label>
+        <textarea id="description" name="description" class="textbox-input-long-multi" rows="4" cols="50" style="resize: none;">{{ description if description else '' }}</textarea>
+        <label for="professor" class="label">Professor</label></span>
+        <select name="professor" id="professor" class="dropdown" required>
             <option disabled {{ "selected" if not current_professor else "" }} value=""> -- Select Professor -- </option>
             {% for first_name, last_name, id in professors %}
             <option value="{{ id }}" {{ "selected" if current_professor == id else "" }}>{{ last_name }}, {{ first_name }}</option>
             {% endfor %}
         </select>
         <span></span>
-        <input type="submit" value="Submit">
+        <div>
+            <input type="submit" class="btn btn-primary" value="Save">
+        </div>
     </div>
     <div>
         <select name="degree-path" id="degree-path" multiple style="height: 100%;">
