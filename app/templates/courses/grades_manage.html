@@ -4,14 +4,30 @@
 
 {% block body %}
 <div id="grades_manage_container">
-    <h2>
-        Select Student
-    </h2>
-    <span></span>
-    <div>
-        [Student List]
-    </div>
-    <div>
+        <div class="on-left">
+            <h2>
+            Select Student
+            </h2>
+            <span></span>
+                <div>
+                    <select name="student-list" id="student-list" multiple style="height: 100%;">
+                        <optgroup label="Students:">
+                        </optgroup>
+                    </select>
+                </div>
+                    <h2>
+                    Select Course
+                    </h2>
+                    <span></span>
+                        <div>
+                            <select name="course-select" id="course-select" multiple style="height: 100%;">
+                                <optgroup label="Course:">
+                                </optgroup>
+                            </select>
+                        </div>
+        </div>
+    <div class="on-right">
+             <span></span>
         <form onsubmit="return false;">
             <label for="assignment">Assignment:</label>
             <option id="assignment"></option>
@@ -31,6 +47,7 @@
                 <label for="absent">Absent:</label>
                 <input id="absent" name="present" type="radio">
             </div>
+                 <button type="submit" class="btn btn-primary">Submit</button>
         </form>
     </div>
 </div>
