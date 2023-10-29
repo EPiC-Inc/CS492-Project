@@ -20,8 +20,9 @@
             {% if session.get('role') %}
                 <a href="{{ url_for('index') }}"><div{{ ' class=current' if selected_tab == "dashboard" else "" }}>Home</div></a>
             {% endif %}
-            {% if session.get('role', 99) <= 2 %}
+            {% if session.get('role', 99) <= 1 %}
                 <a onclick="toggleSubmenu('ManageAccounts');"><div{{ ' class=current' if selected_tab == "manage_accounts" else "" }}>Account Management</div></a>
+            {% endif %}
                 <div id="ManageAccounts" class="submenu-top" style="display: none; position: absolute;">
                     <div id="AddAccount" class="submenu" style="left: 215%; top: 50px;">
                         <a href="{{ url_for('account_admin_page') }}"><div>Add New</div></a>
@@ -30,7 +31,6 @@
                         <a href="{{ url_for('account_admin_page', action='Edit') }}"><div>Edit</div></a>
                     </div>
                 </div>
-            {% endif %}
             {% if session.get('role', 99) <= 2 %}
                 <!-- <a href="{{ url_for('courses') }}"><div{{ ' class=current' if selected_tab == "manage_courses" else "" }}></div></a> -->
                 <!--<div{{ ' class=current' if selected_tab == "courses" else "" }}>Courses</div>-->
@@ -45,7 +45,7 @@
                 </div>
             {% endif %}
             {% if session.get('role', -1) >= 3 %}
-                <!-- <a href="{{ url_for('courses') }}"><div{{ ' class=current' if selected_tab == "courses" else "" }}>Classes</div></a> -->
+                <a href="{{ url_for('courses') }}"><div{{ ' class=current' if selected_tab == "courses" else "" }}>Classes</div></a>
                 <!--<div{{ ' class=current' if selected_tab == "courses" else "" }}>Courses</div>-->
                 <!-- <a onclick="toggleSubmenu('ViewClasses');"><div{{ ' class=current' if selected_tab == "manage_accounts" else "" }}>Classes</div></a>
                 <div id="ViewClasses" class="submenu-top" style="display: none; position: absolute;">

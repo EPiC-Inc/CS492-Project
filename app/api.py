@@ -15,7 +15,14 @@ def search_for_account(to_find: str) -> list:
 
 @api.route('/compose/course_manage_form')
 def compose_course_manage_form():
-    return render_template('courses/_compose_course_details.html')
+    class_code = request.args.get('class_code')
+    if class_code:
+        return render_template('courses/_compose_course_details.html',
+                               class_name="TEST", num_students=20,
+                               description="BIG TEST", degree_path=["Electrical"]
+                               )
+    else:
+        return {"error": "No class code provided"}, 422
 
 
 @api.route("/find_account", methods=["GET"])
