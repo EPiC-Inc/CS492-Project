@@ -180,6 +180,11 @@ header img {
     height: 20px;
     width: 55px;
 }
+.list-multi {
+    width: 400px;
+    font-size: large;
+    height: 100%;
+}
 .btn-primary {
     padding: 10px;
     font-size: large;

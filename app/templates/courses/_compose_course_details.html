@@ -37,7 +37,7 @@
         </div>
     </div>
     <div>
-        <select name="degree-path" id="degree-path" multiple style="height: 100%;">
+        <select name="degree-path" id="degree-path" multiple class="list-multi">
             {% for category in "Engineering,Design,Computer Science,Business Administration,Information Technology".split(',') %}
             <optgroup label="{{ category }}">
                 {% for degree_id, degree_title, degree_category in degrees %}
