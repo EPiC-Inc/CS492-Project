@@ -1,10 +1,13 @@
 <form onsubmit="submitCourse(); return false;">
-    <span></span>
+    <div id="errors" style="padding-top: 3%;"></div>
     <h2>Degree Path:</h2>
     <div class="on-left">
         <span><button id="new_course" onclick="newCourseSelectToggle();">(+)</button> <label for="class-code">Class Code:</label></span>
-        <select name="class-code" id="class-code" onchange="compose();">
-            <!-- TODO get a list of all classes -->
+        <select name="class-code" id="class-code" onchange="compose();" autocomplete="off">
+            <option disabled {{ "selected" if not chosen_class else "" }} value> -- Select Class -- </option>
+            {% for class_id, class_code in course_list %}
+            <option value="{{ class_id }}" {{ "selected" if class_id == chosen_class else "" }}>{{ class_code }}</option>
+            {% endfor %}
         </select>
             <label id="new-class-code-spacer" style="display: none;"></label>
             <input id="new-class-code" style="display: none;">

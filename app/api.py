@@ -14,15 +14,28 @@ def search_for_account(to_find: str) -> list:
 
 
 @api.route('/compose/course_manage_form')
-def compose_course_manage_form():
+def compose_course_manage_form() -> "str | tuple[str, int]":
+    course_list = query_db("getClasses")
     class_code = request.args.get('class_code')
-    if class_code:
+    new_class = request.args.get('new_class', '').lower()
+
+    if new_class == "true":
+        return "Not Implemented", 400
+
+    elif class_code:
+        class_data = query_db("getClassDetail :class_id", class_id=class_code)[0]
+        class_id, class_code, class_title, class_desc, class_start, class_end, professor_id, degree_paths, *_ = class_data
+        class_title = class_title.strip()
+        print(class_code, type(class_code))
         return render_template('courses/_compose_course_details.html',
-                               class_name="TEST", num_students=20,
-                               description="BIG TEST", degree_path=["Electrical"]
+                               chosen_class = int(class_id), course_list = course_list,
+                               class_name=class_title, description = class_desc,
+                               num_students=20,
+                               degree_path=["Electrical"]
                                )
+    
     else:
-        return {"error": "No class code provided"}, 422
+        return "Error: No class ID / code provided", 422
 
 
 @api.route("/find_account", methods=["GET"])
