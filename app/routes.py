@@ -115,13 +115,16 @@ def login():
 @app.route('/courses')
 def courses():
     course_list = query_db("getClasses")
-    # professor_list = query_db("")
+    degree_list = query_db("getDegreePaths")
+    professor_list = query_db("getFacultyDetail")
     if session.get("role", 99) <= 2:
         return render_template('courses/course_manage.html',
-                               selected_tab='manage_courses', course_list=course_list)
+                               selected_tab='manage_courses', course_list=course_list,
+                               degrees=degree_list, professors=professor_list)
     elif session.get("role", -1) >= 3:
         return render_template('courses/course_view.html', selected_tab='courses',
-                               course_list=course_list)
+                               course_list=course_list, degrees=degree_list,
+                               professors=professor_list)
     return redirect(url_for("login"))
 
 @app.route('/grades')

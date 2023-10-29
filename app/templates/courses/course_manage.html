@@ -9,22 +9,28 @@
 {% block scripts %}
 <script>
     function compose() {
-        if (document.getElementById('new-class-code').style.display === 'none') {
-            class_code = document.getElementById('class-code').value;
-            new_class = false;
+        if (document.getElementById('class-code').value === '__new__') {
+            document.getElementById('new-class-code').disabled = false;
+            document.getElementById('new-class-code-spacer').style.display = 'block';
+            document.getElementById('new-class-code').style.display = 'block';
+            for (let el of document.getElementById("COURSE_FORM").elements) if (el.type !== 'submit') el.value = null;
+            document.getElementById('class-code').value = '__new__';
+            document.getElementById('professor').value = '';
         } else {
-            class_code = document.getElementById('new-class-code').value;
-            new_class = true;
-        }
-        fetch("{{ url_for('api.compose_course_manage_form') }}?class_code=" + class_code + "&new_class=" + new_class).then((response) => {
-            response.text().then((body) => {
-                if (response.status != 200) {
-                    document.getElementById("errors").innerText = body
-                } else {
-                    document.getElementById('courses_manage_container').innerHTML = body;
-                }
+            var class_code = document.getElementById('class-code').value;
+            document.getElementById('new-class-code').disabled = true;
+            document.getElementById('new-class-code-spacer').style.display = 'none';
+            document.getElementById('new-class-code').style.display = 'none';
+            fetch("{{ url_for('api.compose_course_manage_form') }}?class_code=" + class_code).then((response) => {
+                response.text().then((body) => {
+                    if (response.status != 200) {
+                        document.getElementById("errors").innerText = body
+                    } else {
+                        document.getElementById('courses_manage_container').innerHTML = body;
+                    }
+                });
             });
-        });
+        }
     }
 
     function newCourseSelectToggle() {
@@ -40,7 +46,7 @@
     }
 
     function submitCourse() {
-        //
+        document.getElementById()
     }
 </script>
 {% endblock %}
