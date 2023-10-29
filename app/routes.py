@@ -129,8 +129,11 @@ def courses():
 
 @app.route('/grades')
 def grades():
+    course_list = query_db("getClasses")
+    student_list = query_db("SELECT Accounts_First_Name, Accounts_Last_Name, AccountsID FROM Accounts INNER JOIN AccountRole on Accounts_Role = AccountRoleID WHERE AccountRoleID = 3")
     if session.get("role", 0) <= 2:
-        return render_template('courses/grades_manage.html', selected_tab='manage_courses')
+        return render_template('courses/grades_manage.html', selected_tab='manage_courses',
+                               courses=course_list, students=student_list)
     elif session.get("role", -1) >= 3:
         return render_template('courses/grades_view.html', selected_tab='grades')
     return redirect(url_for("login"))

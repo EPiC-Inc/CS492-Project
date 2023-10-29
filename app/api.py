@@ -15,6 +15,11 @@ def search_for_account(to_find: str) -> list:
     return []
 
 
+@api.route('/compose/grade_manage_form')
+def compose_grade_manage_form():
+    return ''
+
+
 @api.route('/compose/course_manage_form')
 def compose_course_manage_form() -> "str | tuple[str, int]":
     if not session.get("logged_in"):
