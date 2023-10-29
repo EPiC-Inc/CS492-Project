@@ -23,6 +23,8 @@ def compose_course_manage_form() -> "str | tuple[str, int]":
     course_list = query_db("getClasses")
     class_code = request.args.get('class_code')
     degrees = query_db("getDegreePaths")
+    print(degrees)
+    degrees = [[str(i), j, k] for i, j, k in degrees]
     professors = query_db("getFacultyDetail")
 
     if class_code:
@@ -34,8 +36,9 @@ def compose_course_manage_form() -> "str | tuple[str, int]":
                                class_name=class_title, description = class_desc,
                                degrees = degrees, professors = professors,
                                current_professor = professor_id,
+                               start_date = class_start, end_date = class_end,
                                num_students=20,
-                               degree_path=["Electrical"]
+                               degree_paths=degree_paths
                                )
     
     else:

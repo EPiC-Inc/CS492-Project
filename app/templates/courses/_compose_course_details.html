@@ -38,7 +38,7 @@
             <optgroup label="{{ category }}">
                 {% for degree_id, degree_title, degree_category in degrees %}
                 {% if degree_category == category %}
-                    <option value="{{ degree_id }}">{{ degree_title }}</option>
+                    <option value="{{ degree_id }}" {{ "selected" if degree_paths and degree_id in degree_paths.split(',') else '' }}>{{ degree_title }}</option>
                 {% endif %}
                 {% endfor %}
             </optgroup>
