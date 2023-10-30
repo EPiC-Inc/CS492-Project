@@ -3,14 +3,14 @@
 {% block title %}Manage Grades & Attendance{% endblock %}
 
 {% block body %}
-<br> <br>
+<h1>Manage Grades</h1>
 <div id="grades_manage_container">
     <div class="on-left">
             <h2>
             Select Student
             </h2>
                 <div>
-                    <select name="student-list" id="student-list" style="height: 100%;width: 100%;" autocomplete="off">
+                    <select name="student-list" id="student-list" class=" dropdown" autocomplete="off">
                         <optgroup label="Students:">
                             <option disabled {{ "selected" if not current_professor else "" }} value=""> -- Select Student -- </option>
                             {% for first_name, last_name, id in students %}
@@ -20,12 +20,12 @@
                     </select>
                 </div>
                     <h2>
-                    Select Course
+                    Select Class
                     </h2>
                         <div>
-                            <select name="course-select" id="course-select" style="height: 100%;width: 100%;" autocomplete="off">
-                                <option disabled {{ "selected" if not chosen_class else "" }} value=""> -- Select Course -- </option>
-                                <optgroup label="Course:">
+                            <select name="course-select" id="course-select" class="dropdown" autocomplete="off">
+                                <option disabled {{ "selected" if not chosen_class else "" }} value=""> -- Select Class -- </option>
+                                <optgroup label="Class:">
                                     {% for class_id, class_code in courses %}
                                     <option value="{{ class_id }}" {{ "selected" if class_id == chosen_class else "" }}>{{ class_code }}</option>
                                     {% endfor %}
@@ -33,28 +33,28 @@
                             </select>
                         </div>
     </div>
+    <div class="=grades_manage_container">
         <form onsubmit="return false;">
-            <label for="assignment">Assignment:</label>
-            <select id="assignment"></select>
-            <label for="score">Score:</label>
-            <input id="score">
-            <label for="grade">Student's Overall Grade:</label>
-            <input id="grade">
-            <span></span>
-            <span></span>
-            <label for="date">Select Date</label>
-            <input id="date" type="date">
-            <span></span>
+            <label for="assignment" class="label">Assignment</label>
+            <select name="assignment-select" id="assignment-select" class="dropdown" autocomplete="off">
+                <option disabled {{ "selected" if not chosen_assignment else "" }} value=""> -- Select Assignment -- </option>
+                <option>Discussion Board</option>
+                <option>Document</option>
+                <option>Code</option>
+            </select>
+            <label for="score" class="label">Score</label>
+            <input id="score" class="textbox-input-long">
+            <label for="grade" class="label">Grade</label>
+            <input id="grade" class="textbox-input-long">
+            <label for="date" class="label">Select Date</label>
+            <input id="date" type="date" class="textbox-input-long">
+            <label for="present" class="label">Present</label>
+            <input id="present" name="present" type="checkbox">
+            <br>
             <div>
-                <label for="present">Present:</label>
-                <input id="present" name="present" type="radio">
-                <br>
-                <label for="absent">Absent:</label>
-                <input id="absent" name="present" type="radio">
+                <button type="submit" class="btn btn-primary">Submit</button>
             </div>
-                 <div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                </div>
         </form>
+    </div>
 </div>
 {% endblock %}

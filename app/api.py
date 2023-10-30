@@ -17,6 +17,10 @@ def search_for_account(to_find: str) -> list:
 
 @api.route('/compose/grade_manage_form')
 def compose_grade_manage_form():
+    if not session.get("logged_in"):
+        return {"error": "Not logged in"}, 403
+    if not (session.get("role", 99) <= 2):
+        return {"error": "Unauthorized"}, 401
     return ''
 
 
