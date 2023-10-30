@@ -66,21 +66,33 @@ def authenticate_and_manage_course():
     existing_courses = {str(course[0]): course[1].strip() for course in existing_courses}
     print(existing_courses)
     if class_id == '__new__':
-        execute_db("insertClassDetail :code :title :desc :start :end :professor :degrees",
-                   code=form.get('new-class-code', '').ljust(10, ' ')[:10], title=form.get('class-name', '').ljust(50, ' ')[:50],
+        execute_db("insertClassDetail :code, :title, :desc, :start, :end, :professor, :degrees",
+                   code=form.get('new-class-code', ''), title=form.get('class-name', ''),
                    desc=form.get('description'), start=form.get('start-date'),
                    end=form.get('end-date'), professor=int(form.get('professor', '')),
                    degrees = ','.join(form.getlist('degree-path'))
                    )
-    else:
-        execute_db("updateClassDetail :id :code :title :desc :start :end :professor :degrees",
-                   id=int(class_id), code=existing_courses.get(str(class_id), '').ljust(10, ' ')[:10],
-                   title=form.get('class-name', '').ljust(50, ' ')[:50], desc=form.get('description'),
-                   start=form.get('start-date'), end=form.get('end-date'),
-                   professor=int(form.get('professor', '')),
-                   degrees = ','.join(form.getlist('degree-path'))
-                   )
+#                   code=form.get('new-class-code', '').ljust(10, ' ')[:10], title=form.get('class-name', '').ljust(50, ' ')[:50],
+#                   desc=form.get('description'), start=form.get('start-date'),
+#                   end=form.get('end-date'), professor=int(form.get('professor', '')),
+#                   degrees = ','.join(form.getlist('degree-path'))
+#                   )
 
+    else:
+#        execute_db("updateClassDetail :id :code :title :desc :start :end :professor :degrees",
+#                   id=int(class_id), code=existing_courses.get(str(class_id), '').ljust(10, ' ')[:10],
+#                   title=form.get('class-name', '').ljust(50, ' ')[:50], desc=form.get('description'),
+#                   start=form.get('start-date'), end=form.get('end-date'),
+#                   professor=int(form.get('professor', '')),
+#                   degrees = ','.join(form.getlist('degree-path'))
+#                   )
+        execute_db("updateClassDetail :id, :code, :title, :desc, :start, :end, :professor, :degrees",
+                    id=int(class_id), code=existing_courses.get(str(class_id), ''), 
+                    title=form.get('class-name', ''), desc=form.get('description'),
+                    start=form.get('start-date'), end=form.get('end-date'),
+                    professor=int(form.get('professor', '')),
+                    degrees = ','.join(form.getlist('degree-path'))
+                   )
     return redirect(url_for('courses'))
 
 
