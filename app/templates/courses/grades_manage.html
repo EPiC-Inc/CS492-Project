@@ -34,13 +34,13 @@
                         </div>
     </div>
     <div class="=grades_manage_container">
-        <form onsubmit="return false;">
+        <form onsubmit="submitGrade(); return false;">
             <label for="assignment" class="label">Assignment</label>
             <select name="assignment-select" id="assignment-select" class="dropdown" autocomplete="off">
                 <option disabled {{ "selected" if not chosen_assignment else "" }} value=""> -- Select Assignment -- </option>
-                <option>Discussion Board</option>
-                <option>Document</option>
-                <option>Code</option>
+                <option value="0">Discussion Board</option>
+                <option value="1">Document</option>
+                <option value="2">Code</option>
             </select>
             <label for="score" class="label">Score</label>
             <input id="score" class="textbox-input-long">
@@ -50,6 +50,8 @@
             <input id="date" type="date" class="textbox-input-long">
             <label for="present" class="label">Present</label>
             <input id="present" name="present" type="checkbox">
+            <label for="feedback"></label>
+            <textarea id="feedback" name="feedback" style="resize: vertical;"></textarea>
             <br>
             <div>
                 <button type="submit" class="btn btn-primary">Submit</button>
@@ -57,4 +59,12 @@
         </form>
     </div>
 </div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    function submitGrade() {
+        //TODO - 
+    }
+</script>
 {% endblock %}

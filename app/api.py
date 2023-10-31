@@ -17,12 +17,14 @@ def search_for_account(to_find: str) -> list:
 @api.route('/set_grade', methods=["POST"])
 def set_student_assignment_grade():
     form = request.form
-    execute_db('INSERT INTO Grades (ClassID, TestID, StudentID, Grade, Grade_Feedback) VALUES (:class_id, :test_id, :student_id, :grade, :feedback)',
-               class_id=0,
-               test_id=0,
+    execute_db('insertGrade :student_id, :class_id, :assignment_type, :score, :date, :present, :feedback',
                student_id=form.get('student-list'),
-               grade=form.get('grade'),
-               feedback=''
+               class_id=form.get('course-select'),
+               assignment_type=form.get('assignment-select'),
+               score=form.get('score'),
+               date=form.get('date'),
+               is_present=bool(form.get('present')),
+               feedback=form.get('feedback')
                )
     return ''
 
