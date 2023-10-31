@@ -6,7 +6,6 @@ from .sql import execute_db, query_db
 
 api = Blueprint('api', __name__)
 
-
 def search_for_account(to_find: str) -> list:
     if to_find:
         results = query_db("getSearchAccount :to_find", to_find=to_find)
@@ -15,13 +14,26 @@ def search_for_account(to_find: str) -> list:
     return []
 
 
-@api.route('/compose/grade_manage_form')
-def compose_grade_manage_form():
-    if not session.get("logged_in"):
-        return {"error": "Not logged in"}, 403
-    if not (session.get("role", 99) <= 2):
-        return {"error": "Unauthorized"}, 401
+@api.route('/set_grade', methods=["POST"])
+def set_student_assignment_grade():
+    form = request.form
+    execute_db('INSERT INTO Grades (ClassID, TestID, StudentID, Grade, Grade_Feedback) VALUES (:class_id, :test_id, :student_id, :grade, :feedback)',
+               class_id=0,
+               test_id=0,
+               student_id=form.get('student-list'),
+               grade=form.get('grade'),
+               feedback=''
+               )
     return ''
+
+
+# @api.route('/compose/grade_manage_form')
+# def compose_grade_manage_form():
+#     if not session.get("logged_in"):
+#         return {"error": "Not logged in"}, 403
+#     if not (session.get("role", 99) <= 2):
+#         return {"error": "Unauthorized"}, 401
+#     return ''
 
 
 @api.route('/compose/course_manage_form')

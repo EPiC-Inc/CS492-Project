@@ -11,8 +11,8 @@
             </h2>
                 <div>
                     <select name="student-list" id="student-list" class=" dropdown" autocomplete="off">
+                        <option disabled {{ "selected" if not current_professor else "" }} value=""> -- Select Student -- </option>
                         <optgroup label="Students:">
-                            <option disabled {{ "selected" if not current_professor else "" }} value=""> -- Select Student -- </option>
                             {% for first_name, last_name, id in students %}
                             <option value="{{ id }}" {{ "selected" if current_professor == id else "" }}>{{ last_name }}, {{ first_name }}</option>
                             {% endfor %}
