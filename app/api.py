@@ -15,10 +15,14 @@ def search_for_account(to_find: str) -> list:
 
 
 @api.route('/set_grade', methods=["POST"])
-def set_student_assignment_grade():
-    form = request.form
+def authenticate_and_set_student_assignment_grade():
+    if not session.get("logged_in"):
+        return {"error": "Not logged in"}, 403
+    if not (session.get("role", 99) <= 2):
+        return {"error": "Unauthorized"}, 401
+    form = request.get_json()
     execute_db('insertGrade :student_id, :class_id, :assignment_type, :score, :date, :present, :feedback',
-               student_id=form.get('student-list'),
+               student_id=form.get('student'),
                class_id=form.get('course-select'),
                assignment_type=form.get('assignment-select'),
                score=form.get('score'),
@@ -26,7 +30,7 @@ def set_student_assignment_grade():
                is_present=bool(form.get('present')),
                feedback=form.get('feedback')
                )
-    return ''
+    return {"message": "Success"}
 
 
 # @api.route('/compose/grade_manage_form')

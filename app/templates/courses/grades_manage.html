@@ -64,7 +64,12 @@
 {% block scripts %}
 <script>
     function submitGrade() {
-        //TODO - 
+        fetch("{{ url_for('api.authenticate_and_set_student_assignment_grade') }}", {
+            method: "POST",
+            body: JSON.stringify({
+                'student': document.getElementById('')
+            })
+        });
     }
 </script>
 {% endblock %}
