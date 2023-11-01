@@ -20,17 +20,19 @@ def authenticate_and_set_student_assignment_grade():
         return {"error": "Not logged in"}, 403
     if not (session.get("role", 99) <= 2):
         return {"error": "Unauthorized"}, 401
+
     form = request.get_json()
-    execute_db('insertGrade :student_id, :class_id, :assignment_type, :score, :date, :present, :feedback',
+    print(form)
+    execute_db('insertGrades :student_id, :class_id, :assignment_type, :score, :date, :is_present, :feedback',
                student_id=form.get('student'),
-               class_id=form.get('course-select'),
-               assignment_type=form.get('assignment-select'),
+               class_id=form.get('class'),
+               assignment_type=form.get('assignment_type'),
                score=form.get('score'),
                date=form.get('date'),
                is_present=bool(form.get('present')),
                feedback=form.get('feedback')
                )
-    return {"message": "Success"}
+    return {"message": "Updated grade!"}
 
 
 # @api.route('/compose/grade_manage_form')

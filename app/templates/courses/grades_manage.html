@@ -10,7 +10,7 @@
             Select Student
             </h2>
                 <div>
-                    <select name="student-list" id="student-list" class=" dropdown" autocomplete="off">
+                    <select required name="student-list" id="student-list" class=" dropdown">
                         <option disabled {{ "selected" if not current_professor else "" }} value=""> -- Select Student -- </option>
                         <optgroup label="Students:">
                             {% for first_name, last_name, id in students %}
@@ -23,7 +23,7 @@
                     Select Class
                     </h2>
                         <div>
-                            <select name="course-select" id="course-select" class="dropdown" autocomplete="off">
+                            <select required name="course-select" id="course-select" class="dropdown">
                                 <option disabled {{ "selected" if not chosen_class else "" }} value=""> -- Select Class -- </option>
                                 <optgroup label="Class:">
                                     {% for class_id, class_code in courses %}
@@ -35,23 +35,25 @@
     </div>
     <div class="=grades_manage_container">
         <form onsubmit="submitGrade(); return false;">
-            <label for="assignment" class="label">Assignment</label>
-            <select name="assignment-select" id="assignment-select" class="dropdown" autocomplete="off">
+            <span></span>
+            <div id="errors"></div>
+            <label for="assignment-select" class="label">Assignment</label>
+            <select required name="assignment-select" id="assignment-select" class="dropdown">
                 <option disabled {{ "selected" if not chosen_assignment else "" }} value=""> -- Select Assignment -- </option>
                 <option value="0">Discussion Board</option>
                 <option value="1">Document</option>
                 <option value="2">Code</option>
             </select>
             <label for="score" class="label">Score</label>
-            <input id="score" class="textbox-input-long">
+            <input required id="score" class="textbox-input-long" type="number" min="0" max="100" onchange="displayGradeLetter();">
             <label for="grade" class="label">Grade</label>
-            <input id="grade" class="textbox-input-long">
+            <input readonly id="grade" class="textbox-input-long">
             <label for="date" class="label">Select Date</label>
-            <input id="date" type="date" class="textbox-input-long">
+            <input required id="date" type="date" class="textbox-input-long">
             <label for="present" class="label">Present</label>
             <input id="present" name="present" type="checkbox">
-            <label for="feedback"></label>
-            <textarea id="feedback" name="feedback" style="resize: vertical;"></textarea>
+            <label for="feedback" class="label">Feedback</label>
+            <textarea id="feedback" name="feedback" style="resize: none; height: 4em;" rows="3"></textarea>
             <br>
             <div>
                 <button type="submit" class="btn btn-primary">Submit</button>
@@ -63,12 +65,41 @@
 
 {% block scripts %}
 <script>
+    function displayGradeLetter() {
+        var numericGrade = document.getElementById('score').value;
+        var letter = "";
+        if (numericGrade >= 90) letter = "A";
+        else if (numericGrade >= 80) letter = "B";
+        else if (numericGrade >= 70) letter = "C";
+        else if (numericGrade >= 60) letter = "D";
+        else letter = "F";
+        document.getElementById('grade').value = letter;
+    }
+
     function submitGrade() {
         fetch("{{ url_for('api.authenticate_and_set_student_assignment_grade') }}", {
             method: "POST",
             body: JSON.stringify({
-                'student': document.getElementById('')
-            })
+                'student': document.getElementById('student-list').value,
+                'class': document.getElementById('course-select').value,
+                'assignment_type': document.getElementById('assignment-select').value,
+                'score': document.getElementById('score').value,
+                'date': document.getElementById('date').value,                'present': document.getElementById('present').value,
+                'feedback': document.getElementById('feedback').value
+            }),
+            headers: {
+                "Content-type": "application/json;"
+            }
+        }).then((response) => {
+            response.json().then((json) => {
+                if (json.message) {
+                    document.getElementById('errors').innerText = json.message;
+                } else if (json.error) {
+                    document.getElementById('errors').innerText = json.message;
+                } else {
+                    document.getElementById('errors').innerText = "An unknown error occurred.";
+                }
+            });
         });
     }
 </script>
