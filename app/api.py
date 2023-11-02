@@ -32,7 +32,7 @@ def authenticate_and_set_student_assignment_grade():
                is_present=bool(form.get('present')),
                feedback=form.get('feedback')
                )
-    return {"message": "Updated grade!"}
+    return {"message": "Grade Added"}
 
 
 # @api.route('/compose/grade_manage_form')

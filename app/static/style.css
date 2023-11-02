@@ -179,6 +179,10 @@ header img {
     font-size: large;
     height: 20px;
     width: 55px;
+}.checkbox {
+    width:20px;
+    font-size: large;
+    height: 20px;
 }
 .list-multi {
     width: 400px;
@@ -196,18 +200,18 @@ header img {
 }
 #courses_manage_container form {
     display: grid;
-    grid-template-columns: 5fr 2fr;
-    justify-items: center;
+    grid-template-columns: 2fr 3fr;
+    justify-items: left;
     margin: auto;
     width: 70%;
 }
 #courses_manage_container .on-left {
     display: grid;
-    gap: 5%;
+    gap: 3%;
     grid-template-columns: 1fr 2fr;
     margin: auto;
     margin-bottom: 5%;
-    width: 100%;
+    width: 70%;
 }
 button#new_course {
     vertical-align: top;
@@ -217,17 +221,17 @@ button#new_course {
 #grades_manage_container {
     /* align-items: end; */
     display: grid;
-    grid-template-columns: 2fr 3fr;
-    justify-items: center;
+    grid-template-columns: 1fr 3fr;
+    justify-items: left;
     margin: auto;
     width: 70%;
 }
 #grades_manage_container form {
     display: grid;
-    gap: 5%;
+    gap: 3%;
     grid-template-columns: 1fr 2fr;
     margin: auto;
-    width: 80%;
+    width: 70%;
 }
 .error_message {
     color: darkred;

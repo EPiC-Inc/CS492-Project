@@ -4,8 +4,23 @@
 
 {% block body %}
 <h1>Manage Grades</h1>
+<br/>
+<br/>
 <div id="grades_manage_container">
     <div class="on-left">
+        <h2>
+            Select Class
+            </h2>
+                <div>
+                    <select required name="course-select" id="course-select" class="dropdown">
+                        <option disabled {{ "selected" if not chosen_class else "" }} value=""> -- Select Class -- </option>
+                        <optgroup label="Class:">
+                            {% for class_id, class_code in courses %}
+                            <option value="{{ class_id }}" {{ "selected" if class_id == chosen_class else "" }}>{{ class_code }}</option>
+                            {% endfor %}
+                        </optgroup>
+                    </select>
+                </div>
             <h2>
             Select Student
             </h2>
@@ -19,24 +34,11 @@
                         </optgroup>
                     </select>
                 </div>
-                    <h2>
-                    Select Class
-                    </h2>
-                        <div>
-                            <select required name="course-select" id="course-select" class="dropdown">
-                                <option disabled {{ "selected" if not chosen_class else "" }} value=""> -- Select Class -- </option>
-                                <optgroup label="Class:">
-                                    {% for class_id, class_code in courses %}
-                                    <option value="{{ class_id }}" {{ "selected" if class_id == chosen_class else "" }}>{{ class_code }}</option>
-                                    {% endfor %}
-                                </optgroup>
-                            </select>
-                        </div>
     </div>
     <div class="=grades_manage_container">
         <form onsubmit="submitGrade(); return false;">
-            <span></span>
-            <div id="errors"></div>
+  
+
             <label for="assignment-select" class="label">Assignment</label>
             <select required name="assignment-select" id="assignment-select" class="dropdown">
                 <option disabled {{ "selected" if not chosen_assignment else "" }} value=""> -- Select Assignment -- </option>
@@ -45,19 +47,21 @@
                 <option value="2">Code</option>
             </select>
             <label for="score" class="label">Score</label>
-            <input required id="score" class="textbox-input-long" type="number" min="0" max="100" onchange="displayGradeLetter();">
+            <input required id="score" class="textbox-input-short" type="number" min="0" max="100" onchange="displayGradeLetter();">
             <label for="grade" class="label">Grade</label>
-            <input readonly id="grade" class="textbox-input-long">
+            <input readonly id="grade" class="textbox-input-short" style="background-color:rgb(225, 230, 233)">
             <label for="date" class="label">Select Date</label>
-            <input required id="date" type="date" class="textbox-input-long">
+            <input required id="date" type="date" class="textbox-input-medium">
             <label for="present" class="label">Present</label>
-            <input id="present" name="present" type="checkbox">
+            <input id="present" name="present" type="checkbox" class="checkbox">
             <label for="feedback" class="label">Feedback</label>
-            <textarea id="feedback" name="feedback" style="resize: none; height: 4em;" rows="3"></textarea>
+            <textarea id="feedback" name="feedback" style="resize: none; height: 10em;" rows="10"></textarea>
             <br>
             <div>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </div>
+            <span></span>
+            <div id="errors"></div>
         </form>
     </div>
 </div>
@@ -67,6 +71,9 @@
 <script>
     function displayGradeLetter() {
         var numericGrade = document.getElementById('score').value;
+        if (numericGrade < 0) numericGrade = 0;
+        document.getElementById('score').value = numericGrade;
+
         var letter = "";
         if (numericGrade >= 90) letter = "A";
         else if (numericGrade >= 80) letter = "B";
